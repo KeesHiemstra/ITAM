@@ -6,7 +6,32 @@
         xmlns:local="clr-namespace:WpfApp_1910501"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Name="QueryCollectionTextBlock"
+                   Text=""
+                   Grid.Row="0"/>
+
+        <DataGrid Name="WMIPropertiesDataGrid"
+                  ItemsSource="{Binding}"
+                  HorizontalScrollBarVisibility="Visible"
+                  VerticalScrollBarVisibility="Visible"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  Grid.Row="1">
+            <DataGrid.Columns>
+                <DataGridCheckBoxColumn Header="Select" Binding="{Binding Select}" />
+                <DataGridTextColumn Header="Coll" Binding="{Binding CollectionIndex}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Prop" Binding="{Binding PropertyIndex}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Type" Binding="{Binding Type}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Value" Binding="{Binding Value}" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>
