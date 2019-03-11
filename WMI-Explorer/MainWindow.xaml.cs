@@ -27,8 +27,6 @@ namespace WMI_Explorer
     public MainWindow()
     {
       InitializeComponent();
-
-      WMIPropertiesDataGrid.ItemsSource = WMIProperties;
     }
 
     private void WMIClassComboBox_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -45,6 +43,8 @@ namespace WMI_Explorer
 
     private void CollectWMI(string wmiName)
     {
+      WMIProperties.Clear();
+
       ConnectionOptions options = new ConnectionOptions();
       options.Impersonation = System.Management.ImpersonationLevel.Impersonate;
 
@@ -58,7 +58,7 @@ namespace WMI_Explorer
 
       ManagementObjectCollection queryCollection = searcher.Get();
 
-      //QueryCollectionTextBlock.Text = $"Collection count: {queryCollection.Count}";
+      CollectionCountTextBlock.Text = $"{queryCollection.Count}";
 
       int collectionIndex = 0;
       foreach (ManagementObject managementObject in queryCollection)
@@ -71,6 +71,8 @@ namespace WMI_Explorer
         }
         collectionIndex++;
       }
+
+      WMIPropertiesDataGrid.ItemsSource = WMIProperties;
     }
   }
 }

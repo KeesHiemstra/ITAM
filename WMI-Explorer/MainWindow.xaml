@@ -510,6 +510,8 @@
             <ComboBoxItem>SoftwareLicensingTokenActivationLicense</ComboBoxItem>
             <ComboBoxItem>StdRegProv</ComboBoxItem>
             -->
+            <ComboBoxItem>Win32_BIOS</ComboBoxItem>
+            <ComboBoxItem>Win32_OperatingSystem</ComboBoxItem>
             <ComboBoxItem>Win32_1394Controller</ComboBoxItem>
             <ComboBoxItem>Win32_1394ControllerDevice</ComboBoxItem>
             <ComboBoxItem>Win32_Account</ComboBoxItem>
@@ -527,7 +529,6 @@
             <ComboBoxItem>Win32_Battery</ComboBoxItem>
             <ComboBoxItem>Win32_Binary</ComboBoxItem>
             <ComboBoxItem>Win32_BindImageAction</ComboBoxItem>
-            <ComboBoxItem>Win32_BIOS</ComboBoxItem>
             <ComboBoxItem>Win32_BootConfiguration</ComboBoxItem>
             <ComboBoxItem>Win32_Bus</ComboBoxItem>
             <ComboBoxItem>Win32_CacheMemory</ComboBoxItem>
@@ -703,7 +704,6 @@
             <ComboBoxItem>Win32_OfflineFilesSuspendInfo</ComboBoxItem>
             <ComboBoxItem>Win32_OfflineFilesUserConfiguration</ComboBoxItem>
             <ComboBoxItem>Win32_OnBoardDevice</ComboBoxItem>
-            <ComboBoxItem>Win32_OperatingSystem</ComboBoxItem>
             <ComboBoxItem>Win32_OperatingSystemAutochkSetting</ComboBoxItem>
             <ComboBoxItem>Win32_OperatingSystemQFE</ComboBoxItem>
             <ComboBoxItem>Win32_OptionalFeature</ComboBoxItem>

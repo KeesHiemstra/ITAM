@@ -29,17 +29,36 @@ namespace WMI_Explorer
       else if (data.IsArray)
       {
         string array = "";
-        foreach (string item in (string[])data.Value)
+
+        if (data.Value.GetType() == typeof(string[]))
         {
-          if (!string.IsNullOrEmpty(array))
+          foreach (string item in (string[])data.Value)
           {
-            array += ", ";
+            if (!string.IsNullOrEmpty(array))
+            {
+              array += ", ";
+            }
+
+            array += item;
           }
-
-          array += item;
         }
+        else if (data.Value.GetType() == typeof(UInt16[]))
+        {
+          foreach (UInt16 item in (UInt16[])data.Value)
+          {
+            if (!string.IsNullOrEmpty(array))
+            {
+              array += ", ";
+            }
 
-        Value = "{" + array + "}";
+            array += item.ToString();
+          }
+        }
+        else
+        {
+          array = "<unknown>";
+        }
+        Value = "array {" + array + "}";
       }
       else if (data.Type.ToString() == "DataTime")
       {
