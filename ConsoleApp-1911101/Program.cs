@@ -23,7 +23,7 @@ namespace ConsoleApp_1911101
       GetInstalledSoftware(false);
       GetInstalledSoftware(true);
 
-      SaveData("C:\\Temp\\RegistryOutput.txt");
+      //SaveData("C:\\Temp\\RegistryOutput.txt");
 
       Console.Write("\nPress any key...");
       Console.ReadKey();
@@ -111,10 +111,11 @@ namespace ConsoleApp_1911101
               }
               catch (Exception ex)
               {
-                Console.WriteLine($"{Bits}\t{Name}\t{Field.Key}\t{ex.Message}");
+                //Console.WriteLine($"{Bits}\t{Name}\t{Field.Key}\t{ex.Message}");
                 Line += "\t";
               }
             }
+            //ToDo: Skip adding when it is already existing
             Data.Add(Line);
           }
         }//for each subKeyName

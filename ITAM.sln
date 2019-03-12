@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WMI-Explorer", "WMI-Explore
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp-1911101", "ConsoleApp-1911101\ConsoleApp-1911101.csproj", "{7BAF6B84-FCAF-421A-B517-DA91C9F2FFAE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Software-Explorer", "Software-Explorer\Software-Explorer.csproj", "{790B93E0-9DBC-45D2-BFAA-970D30033366}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{7BAF6B84-FCAF-421A-B517-DA91C9F2FFAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BAF6B84-FCAF-421A-B517-DA91C9F2FFAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BAF6B84-FCAF-421A-B517-DA91C9F2FFAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{790B93E0-9DBC-45D2-BFAA-970D30033366}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{790B93E0-9DBC-45D2-BFAA-970D30033366}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{790B93E0-9DBC-45D2-BFAA-970D30033366}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{790B93E0-9DBC-45D2-BFAA-970D30033366}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
