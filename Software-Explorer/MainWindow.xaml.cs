@@ -21,11 +21,13 @@ namespace Software_Explorer
   /// </summary>
   public partial class MainWindow : Window
   {
-    SoftwareList InstalledSoftware = new SoftwareList();
+    public SoftwareList InstalledSoftware = new SoftwareList();
 
     public MainWindow()
     {
       InitializeComponent();
+
+      SoftwareDataGrid.ItemsSource = InstalledSoftware.Items;
     }
   }
 }
