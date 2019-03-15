@@ -58,21 +58,34 @@ namespace WMI_Explorer
 
       ManagementObjectCollection queryCollection = searcher.Get();
 
-      CollectionCountTextBlock.Text = $"{queryCollection.Count}";
-
-      int collectionIndex = 0;
-      foreach (ManagementObject managementObject in queryCollection)
+      try
       {
-        int propertyIndex = 0;
-        foreach (PropertyData propertyData in managementObject.Properties)
+        CollectionCountTextBlock.Text = $"{queryCollection.Count}";
+
+        int collectionIndex = 0;
+        foreach (ManagementObject managementObject in queryCollection)
         {
-          WMIProperties.Add(new WMIProperty(collectionIndex, propertyIndex, propertyData));
-          propertyIndex++;
+          int propertyIndex = 0;
+          foreach (PropertyData propertyData in managementObject.Properties)
+          {
+            WMIProperties.Add(new WMIProperty(collectionIndex, propertyIndex, propertyData));
+            propertyIndex++;
+          }
+          collectionIndex++;
         }
-        collectionIndex++;
+      }
+      catch (Exception ex)
+      {
+        MessageBox.Show($"Error: {ex.Message}", "Exception error");
       }
 
       WMIPropertiesDataGrid.ItemsSource = WMIProperties;
+    }
+
+    private void ClassCode_Click(object sender, RoutedEventArgs e)
+    {
+      CodeWindow window = new CodeWindow();
+      window.Show();
     }
   }
 }
