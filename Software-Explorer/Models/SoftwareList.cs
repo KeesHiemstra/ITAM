@@ -71,7 +71,7 @@ namespace Software_Explorer.Models
 
           }//using registry subKey to collect the data
 
-          //ToDo: Skip adding when it is already existing
+          //toDo: Skip adding when it is already existing
           Items.Add(si);
         }//for each subKeyName
       }//using registry key to query all installed software

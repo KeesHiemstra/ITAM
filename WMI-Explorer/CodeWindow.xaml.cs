@@ -19,11 +19,105 @@ namespace WMI_Explorer
   /// </summary>
   public partial class CodeWindow : Window
   {
-    public CodeWindow()
+    private string WmiClass;
+    private Dictionary<string, string> WmiRecord;
+
+    public CodeWindow(string wmiClass, Dictionary<string, string> wmiRecord)
     {
+      WmiClass = wmiClass;
+      WmiRecord = wmiRecord;
+
       InitializeComponent();
-
-
     }
+
+    private void Window_Loaded(object sender, RoutedEventArgs e)
+    {
+      WriteCode();
+    }
+
+    private async Task WriteCode()
+    {
+      await WriteCodeRecord();
+      await WriteCodeList();
+      await WriteCodeExtra();
+    }
+
+    private async Task WriteCodeRecord()
+    {
+      CodeRecordTextBox.Text += $"\tpublic class {WmiClass}\n";
+      CodeRecordTextBox.Text += "\t{\n";
+      CodeRecordTextBox.Text += $"\t\tpublic {WmiClass}(WmiRecord data)\n";
+      CodeRecordTextBox.Text += "\t\t{\n";
+      // Loop through members
+      foreach (var item in WmiRecord)
+      {
+        CodeRecordTextBox.Text += $"\t\t\t{item.Key} = data.Properties[\"{item.Value}\"];\n";
+      }
+      //End loop
+      CodeRecordTextBox.Text += "\t\t}\n";
+      CodeRecordTextBox.Text += "\n";
+      // Loop through members
+      foreach (var item in WmiRecord)
+      {
+        CodeRecordTextBox.Text += $"\t\tpublic string {item.Key} " + "{ get; private set; }\n";
+      }
+      // End loop
+      CodeRecordTextBox.Text += "\t}\n";
+    }
+
+    private async Task WriteCodeList()
+    {
+      CodeListTextBox.Text += $"\tpublic class {WmiClass}_List\n";
+      CodeListTextBox.Text += "\t{\n";
+      CodeListTextBox.Text += "\t\tpublic string ComputerName { get; set; }\n";
+      CodeListTextBox.Text += $"\t\tpublic List<{WmiClass}> Items = new List<{WmiClass}>();\n";
+      CodeListTextBox.Text += "\n";
+      CodeListTextBox.Text += $"\t\tpublic {WmiClass}_List(string WmiClass, string members)\n";
+      CodeListTextBox.Text += "\t\t{\n";
+      CodeListTextBox.Text += "\t\t\tComputerName = System.Environment.MachineName;\n";
+      CodeListTextBox.Text += "\t\t\tCollectWmiClass(WmiClass, members);\n";
+      CodeListTextBox.Text += "\t\t}\n";
+      CodeListTextBox.Text += "\n";
+      CodeListTextBox.Text += "\t\tprivate void CollectWmiClass(string wmiClass, string members)\n";
+      CodeListTextBox.Text += "\t\t{\n";
+      CodeListTextBox.Text += "\t\t\tItems.Clear();\n";
+      CodeListTextBox.Text += "\n";
+      CodeListTextBox.Text += $"\t\t\ttry\n";
+      CodeListTextBox.Text += "\t\t\t{\n";
+      CodeListTextBox.Text += "\t\t\t\tforeach (ManagementObject managementObject in WmiList.GetCollection(wmiClass, members))\n";
+      CodeListTextBox.Text += "\t\t\t\t{\n";
+      CodeListTextBox.Text += "\t\t\t\t\tWmiRecord record = new WmiRecord();\n";
+      CodeListTextBox.Text += "\t\t\t\t\tforeach (PropertyData propertyData in managementObject.Properties)\n";
+      CodeListTextBox.Text += "\t\t\t\t\t{\n";
+      CodeListTextBox.Text += "\t\t\t\t\t\trecord.ProcessProperty(propertyData);\n";
+      CodeListTextBox.Text += "\t\t\t\t\t}\n";
+      CodeListTextBox.Text += $"\t\t\t\t\tItems.Add(new {WmiClass}(record));\n";
+      CodeListTextBox.Text += "\t\t\t\t}\n";
+      CodeListTextBox.Text += "\t\t\t}\n";
+      CodeListTextBox.Text += "\t\t\tcatch (Exception ex)\n";
+      CodeListTextBox.Text += "\t\t\t{\n";
+      CodeListTextBox.Text += "\t\t\t\tMessageBox.Show($\"Quering the WMI results in an exception:\\" +
+        "n{ex.Message}\", \"Exception\", MessageBoxButton.OK, MessageBoxImage.Exclamation);\n";
+      CodeListTextBox.Text += "\t\t\t}\n";
+      CodeListTextBox.Text += "\n";
+      CodeListTextBox.Text += "\t\t}\n";
+      CodeListTextBox.Text += "\t}\n";
+      CodeListTextBox.Text += "\n";
+    }
+
+    private async Task WriteCodeExtra()
+    {
+      string Members = "";
+      foreach (var item in WmiRecord)
+      {
+        if (!string.IsNullOrEmpty(Members))
+        {
+          Members += ",";
+        }
+        Members += item.Value;
+      }
+      CodeExtraTextBox.Text += $"\t\t{WmiClass}_List {WmiClass.ToLower()} = new {WmiClass}_List(\"{WmiClass}\", \"{Members}\");\n";
+    }
+
   }
 }

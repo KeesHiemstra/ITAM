@@ -22,6 +22,8 @@ namespace WMI_Explorer
   /// </summary>
   public partial class MainWindow : Window
   {
+    private string WmiClass;
+
     public ObservableCollection<WMIProperty> WMIProperties { get; set; } = new ObservableCollection<WMIProperty>();
 
     public MainWindow()
@@ -36,8 +38,8 @@ namespace WMI_Explorer
 
     private void WMIClassComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-      string wmiName = (string)((ComboBoxItem)((ComboBox)e.Source).SelectedValue).Content;
-      CollectWMI(wmiName);
+      WmiClass = (string)((ComboBoxItem)((ComboBox)e.Source).SelectedValue).Content;
+      CollectWMI(WmiClass);
 
     }
 
@@ -84,7 +86,19 @@ namespace WMI_Explorer
 
     private void ClassCode_Click(object sender, RoutedEventArgs e)
     {
-      CodeWindow window = new CodeWindow();
+      Dictionary<string, string> WmiRecord = new Dictionary<string, string>();
+      foreach (WMIProperty item in WMIPropertiesDataGrid.Items.SourceCollection)
+      {
+        if (item.Select)
+        {
+          try
+          {
+            WmiRecord.Add(item.Name, item.Name);
+          }
+          catch { }
+        }
+      }
+      CodeWindow window = new CodeWindow(WmiClass, WmiRecord);
       window.Show();
     }
   }
