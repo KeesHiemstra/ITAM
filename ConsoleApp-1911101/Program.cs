@@ -115,7 +115,7 @@ namespace ConsoleApp_1911101
                 Line += "\t";
               }
             }
-            //ToDo: Skip adding when it is already existing
+            //toDo: Skip adding when it is already existing
             Data.Add(Line);
           }
         }//for each subKeyName

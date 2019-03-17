@@ -5,22 +5,44 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WMI_Explorer"
         mc:Ignorable="d"
-        Title="CodeWindow" Height="450" Width="800">
+        Title="CodeWindow" Height="450" Width="800" Loaded="Window_Loaded">
   <Grid Margin="10">
     <Grid.RowDefinitions>
+      <RowDefinition Height="2*"/>
+      <RowDefinition Height="2*"/>
       <RowDefinition Height="*"/>
       <RowDefinition Height="Auto"/>
     </Grid.RowDefinitions>
 
-    <TextBox Name="CodeTextBox"
+    <TextBox Name="CodeRecordTextBox"
              FontFamily="Courier New" 
              FontSize="11" 
              VerticalScrollBarVisibility="Auto" 
              HorizontalScrollBarVisibility="Auto" 
              AcceptsReturn="True" 
              AcceptsTab="True" 
-             AutoWordSelection="True">
-      
-    </TextBox>
+             AutoWordSelection="True"
+             Grid.Row="0"/>
+
+    <TextBox Name="CodeListTextBox"
+             FontFamily="Courier New" 
+             FontSize="11" 
+             VerticalScrollBarVisibility="Auto" 
+             HorizontalScrollBarVisibility="Auto" 
+             AcceptsReturn="True" 
+             AcceptsTab="True" 
+             AutoWordSelection="True"
+             Grid.Row="1"/>
+
+    <TextBox Name="CodeExtraTextBox"
+             FontFamily="Courier New" 
+             FontSize="11" 
+             VerticalScrollBarVisibility="Auto" 
+             HorizontalScrollBarVisibility="Auto" 
+             AcceptsReturn="True" 
+             AcceptsTab="True" 
+             AutoWordSelection="True"
+             Grid.Row="2"/>
+
   </Grid>
 </Window>
