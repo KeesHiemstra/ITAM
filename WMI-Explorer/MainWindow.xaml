@@ -1560,7 +1560,7 @@
               Grid.ColumnSpan="3"
               Grid.Row="5">
       <DataGrid.Columns>
-        <DataGridCheckBoxColumn Header="Select" Binding="{Binding Select}" />
+        <DataGridCheckBoxColumn Header="Select" Binding="{Binding Select, Mode=TwoWay}" />
         <DataGridTextColumn Header="Coll" Binding="{Binding CollectionIndex}" IsReadOnly="True"/>
         <DataGridTextColumn Header="Prop" Binding="{Binding PropertyIndex}" IsReadOnly="True"/>
         <DataGridTextColumn Header="Name" Binding="{Binding Name}" IsReadOnly="True"/>

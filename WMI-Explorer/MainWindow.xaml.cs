@@ -73,6 +73,7 @@ namespace WMI_Explorer
             WMIProperties.Add(new WMIProperty(collectionIndex, propertyIndex, propertyData));
             propertyIndex++;
           }
+          App.Log($"Added WMI record ({collectionIndex})");
           collectionIndex++;
         }
       }
@@ -87,7 +88,8 @@ namespace WMI_Explorer
     private void ClassCode_Click(object sender, RoutedEventArgs e)
     {
       Dictionary<string, string> WmiRecord = new Dictionary<string, string>();
-      foreach (WMIProperty item in WMIPropertiesDataGrid.Items.SourceCollection)
+
+      foreach (WMIProperty item in WMIPropertiesDataGrid.ItemsSource)
       {
         if (item.Select)
         {
@@ -95,7 +97,7 @@ namespace WMI_Explorer
           {
             WmiRecord.Add(item.Name, item.Name);
           }
-          catch { }
+          catch { /* MessageBox.Show($"Error adding {item.Name}"); */ }
         }
       }
       CodeWindow window = new CodeWindow(WmiClass, WmiRecord);

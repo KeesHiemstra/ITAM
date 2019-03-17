@@ -78,31 +78,25 @@ namespace WMI_Explorer
       CodeListTextBox.Text += "\t\t\tCollectWmiClass(WmiClass, members);\n";
       CodeListTextBox.Text += "\t\t}\n";
       CodeListTextBox.Text += "\n";
-      CodeListTextBox.Text += "\t\tprivate void CollectWmiClass(string wmiClass, string members)\n";
+      CodeListTextBox.Text += "\t\tprivate async void CollectWmiClass(string wmiClass, string members)\n";
       CodeListTextBox.Text += "\t\t{\n";
       CodeListTextBox.Text += "\t\t\tItems.Clear();\n";
       CodeListTextBox.Text += "\n";
-      CodeListTextBox.Text += $"\t\t\ttry\n";
+      CodeListTextBox.Text += "\t\t\tforeach (ManagementObject managementObject in WmiList.GetCollection(wmiClass, members))\n";
       CodeListTextBox.Text += "\t\t\t{\n";
-      CodeListTextBox.Text += "\t\t\t\tforeach (ManagementObject managementObject in WmiList.GetCollection(wmiClass, members))\n";
+      CodeListTextBox.Text += $"\t\t\t\ttry\n";
       CodeListTextBox.Text += "\t\t\t\t{\n";
-      CodeListTextBox.Text += "\t\t\t\t\tWmiRecord record = new WmiRecord();\n";
+      CodeListTextBox.Text += "\t\t\t\t\tWmiRecord record = new WmiRecord(members);\n";
       CodeListTextBox.Text += "\t\t\t\t\tforeach (PropertyData propertyData in managementObject.Properties)\n";
       CodeListTextBox.Text += "\t\t\t\t\t{\n";
       CodeListTextBox.Text += "\t\t\t\t\t\trecord.ProcessProperty(propertyData);\n";
       CodeListTextBox.Text += "\t\t\t\t\t}\n";
       CodeListTextBox.Text += $"\t\t\t\t\tItems.Add(new {WmiClass}(record));\n";
       CodeListTextBox.Text += "\t\t\t\t}\n";
+      CodeListTextBox.Text += "\t\t\t\tcatch { }\n";
       CodeListTextBox.Text += "\t\t\t}\n";
-      CodeListTextBox.Text += "\t\t\tcatch (Exception ex)\n";
-      CodeListTextBox.Text += "\t\t\t{\n";
-      CodeListTextBox.Text += "\t\t\t\tMessageBox.Show($\"Quering the WMI results in an exception:\\" +
-        "n{ex.Message}\", \"Exception\", MessageBoxButton.OK, MessageBoxImage.Exclamation);\n";
-      CodeListTextBox.Text += "\t\t\t}\n";
-      CodeListTextBox.Text += "\n";
       CodeListTextBox.Text += "\t\t}\n";
       CodeListTextBox.Text += "\t}\n";
-      CodeListTextBox.Text += "\n";
     }
 
     private async Task WriteCodeExtra()
