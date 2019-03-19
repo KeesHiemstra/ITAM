@@ -1,0 +1,40 @@
+﻿<Window x:Class="WMI_Discover.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WMI_Discover"
+        mc:Ignorable="d"
+        Title="WMI Discover" Height="450" Width="800">
+  <Grid Margin="10">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*"/>
+      <ColumnDefinition Width="3*"/>
+    </Grid.ColumnDefinitions>
+
+    <StackPanel Grid.Column="0">
+      <Label Content="_Search:"/>
+      <StackPanel Orientation="Horizontal">
+        <TextBox Name="SearchTextBox"
+                 Text="{Binding NameSearch}"
+                 Width="150"/>
+        <Button Name="SearchBotton"
+                Content=">"
+                Click="SearchBotton_Click"
+                Width="21"/>
+      </StackPanel>
+    </StackPanel>
+
+    <TabControl Name="MainTabControl" Grid.Column="1">
+      <TabItem Name="MainTabItem"
+               Header="Main">
+
+        <DataGrid Name="ClassesDataGrid"
+                  ItemsSource="{Binding}">
+          
+        </DataGrid>
+        
+      </TabItem>
+    </TabControl>
+  </Grid>
+</Window>

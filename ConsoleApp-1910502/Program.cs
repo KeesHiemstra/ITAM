@@ -30,6 +30,7 @@ namespace ConsoleApp_1910502
       Console.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")} ");
       //Query system for Operating System information
       ObjectQuery query = new ObjectQuery($"SELECT * FROM {wmiName}");
+      //ObjectQuery query = new ObjectQuery($"SELECT * FROM meta_class");
 
       Console.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff")} ");
       ManagementObjectSearcher searcher = new ManagementObjectSearcher(scope, query);
