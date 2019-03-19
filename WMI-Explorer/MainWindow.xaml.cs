@@ -73,7 +73,7 @@ namespace WMI_Explorer
             WMIProperties.Add(new WMIProperty(collectionIndex, propertyIndex, propertyData));
             propertyIndex++;
           }
-          App.Log($"Added WMI record ({collectionIndex})");
+          //App.Log($"Added WMI record ({collectionIndex})");
           collectionIndex++;
         }
       }

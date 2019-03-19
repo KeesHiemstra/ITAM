@@ -86,16 +86,21 @@ namespace WMI_Classes
     {
       Dictionary<string, string> CatagoryPairs = new Dictionary<string, string>
       {
+        { "ccm", "CCM" },
         { "cim", "CIM" },
+        { "hp", "HP" },
         { "msft", "MSFT" },
-        { "win32", "Win32" }
+        { "office2013", "Office2013" },
+        { "sms", "SMS" },
+        { "win32", "Win32" },
+        { "win32reg", "Win32Reg" }
       };
 
       foreach (string ClassName in ClassNames)
       {
-        //var FoundClass = WMIClasses.Where(x => x.Name == ClassName).SingleOrDefault();
-        var FoundClass = WMIClasses.Where(x => x.Name == ClassName);
-        if (FoundClass == null)
+        int FoundClass = WMIClasses.Where(x => x.Name == ClassName).Count();
+
+        if (FoundClass == 0)
         {
           string category = string.Empty;
           if (ClassName.StartsWith("_"))
@@ -111,7 +116,14 @@ namespace WMI_Classes
             int underscore = ClassName.IndexOf('_');
             if (underscore > 0)
             {
-              category = CatagoryPairs[ClassName.Substring(0, underscore).ToLower()];
+              if (CatagoryPairs.ContainsKey(ClassName.Substring(0, underscore).ToLower()))
+              {
+                category = CatagoryPairs[ClassName.Substring(0, underscore).ToLower()];
+              }
+              else
+              {
+                category = "unknown";
+              }
             }
           }
           WMIClasses.Add(new WMIClass {

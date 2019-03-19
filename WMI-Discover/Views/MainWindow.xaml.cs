@@ -23,18 +23,24 @@ namespace WMI_Discover
   /// </summary>
   public partial class MainWindow : Window
   {
-    MainModelView ModelView = new MainModelView();
+    public MainModelView ModelView;
 
     public MainWindow()
     {
       InitializeComponent();
 
-      DataContext = this;
+      ModelView = new MainModelView(this);
+      DataContext = ModelView;
     }
 
     private void SearchBotton_Click(object sender, RoutedEventArgs e)
     {
+      ModelView.UpdateFilterWMIClassNames();
+    }
 
+    private void WMIClassComboBox_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+    {
+      //MessageBox.Show("Help");
     }
   }
 }

@@ -109,7 +109,7 @@ namespace ConsoleApp_1911101
               {
                 Line += $"\t{subRegistryKey.GetValue(Field.Key).ToString()}";
               }
-              catch (Exception ex)
+              catch /* (Exception ex) */
               {
                 //Console.WriteLine($"{Bits}\t{Name}\t{Field.Key}\t{ex.Message}");
                 Line += "\t";

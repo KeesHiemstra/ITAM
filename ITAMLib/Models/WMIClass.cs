@@ -8,7 +8,7 @@ namespace ITAMLib.Models
 {
   public class WMIClass
   {
-    public enum ClassStatus {Unknown, OK, Empty, Error}
+    //public enum ClassStatus {Unknown, OK, Empty, Error}
 
     public string Name { get; set; }
     public string Catagory { get; set; }
