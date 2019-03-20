@@ -5,8 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WMI_Discover"
         mc:Ignorable="d"
-        Title="WMI Discover" Height="450" Width="800">
-  
+        Title="WMI Discover" 
+        Height="450" 
+        Width="1000" 
+        Closing="Window_Closing">
+
   <Grid Margin="10">
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="*"/>
@@ -22,18 +25,18 @@
                 Grid.RowSpan="2">
 
       <TextBlock Name="ClassNameCountTextBlock"/>
-      
+
       <Separator Margin="0,10,10,10"/>
 
       <Border BorderThickness="1"
               BorderBrush="LightGray"
               Margin="0,0,10,0"
               Padding="5">
-        
+
         <StackPanel>
           <Label Content="_Contain class names:"/>
-            <TextBox Name="SearchTextBox"
-                 Text="{Binding ClassNameContain, Mode=TwoWay}"
+          <TextBox Name="SearchTextBox"
+                 Text="{Binding ClassNameContain, Mode=TwoWay}" KeyUp="SearchTextBox_KeyUp"
                  />
 
           <Label Content="C_ategory:"/>
@@ -53,14 +56,19 @@
 
         </StackPanel>
       </Border>
-      
+
+      <Separator Margin="0,10,10,10"/>
+
+      <TextBlock Name="PropertiesCountTextBlock"/>
+
     </StackPanel>
 
 
     <ComboBox Name="WMIClassComboBox"
               Margin="0,0,0,5"
               Grid.Column="1"
-              Grid.Row="0" DataContextChanged="WMIClassComboBox_DataContextChanged"/>
+              Grid.Row="0" 
+              SelectionChanged="WMIClassComboBox_SelectionChanged"/>
 
     <TabControl Name="MainTabControl"
                 Grid.Column="1"
@@ -69,20 +77,32 @@
                Header="Main">
 
         <Grid Name="MainTabItemGrid">
-          
-          <DataGrid Name="PropertiesDataGrid"
-                  ItemsSource="{Binding}">
 
+          <DataGrid Name="WMIPropertiesDataGrid"
+                    ItemsSource="{Binding}"
+                    HorizontalScrollBarVisibility="Visible"
+                    VerticalScrollBarVisibility="Visible"
+                    AutoGenerateColumns="False"
+                    CanUserAddRows="False"
+                    CanUserDeleteRows="False">
+            <DataGrid.Columns>
+              <DataGridCheckBoxColumn Header="Select" Binding="{Binding Select}" />
+              <DataGridTextColumn Header="Coll" Binding="{Binding CollectionIndex}" IsReadOnly="True"/>
+              <DataGridTextColumn Header="Prop" Binding="{Binding PropertyIndex}" IsReadOnly="True"/>
+              <DataGridTextColumn Header="Name" Binding="{Binding Name}" IsReadOnly="True"/>
+              <DataGridTextColumn Header="Type" Binding="{Binding Type}" IsReadOnly="True"/>
+              <DataGridTextColumn Header="Value" Binding="{Binding Value}" IsReadOnly="True"/>
+            </DataGrid.Columns>
           </DataGrid>
 
         </Grid>
-        
-      
+
+
       </TabItem>
       <TabItem Name="ResultTabItem"
                Header="Result"
                IsEnabled="False">
-        
+
       </TabItem>
     </TabControl>
   </Grid>
