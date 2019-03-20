@@ -38,9 +38,31 @@ namespace WMI_Discover
       ModelView.UpdateFilterWMIClassNames();
     }
 
-    private void WMIClassComboBox_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+    private async void WMIClassComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-      //MessageBox.Show("Help");
+      try
+      {
+        string wMIClassName = ((ComboBox)e.Source).SelectedValue.ToString();
+        bool collected = false;
+        //Task.Run(() => { ModelView.SelectWMIClassName(wMIClassName); });
+        //await Task.Run(async() => { collect = await ModelView.SelectWMIClassName(wMIClassName); });
+        collected = await ModelView.SelectWMIClassName(wMIClassName);
+        WMIPropertiesDataGrid.ItemsSource = ModelView.WMIProperties;
+      }
+      catch (Exception ex)
+      {
+        //MessageBox.Show($"WMIClassComboBox_SelectionChanged exception:\n{ex.Message}");
+      }
+    }
+
+    private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+    {
+      ModelView.SaveWMIClasses();
+    }
+
+    private void SearchTextBox_KeyUp(object sender, KeyEventArgs e)
+    {
+      ModelView.SearchTextBoxOnKey(e);
     }
   }
 }
