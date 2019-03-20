@@ -99,8 +99,8 @@
 
 
       </TabItem>
-      <TabItem Name="ResultTabItem"
-               Header="Result"
+      <TabItem Name="PivotTabItem"
+               Header="Pivot"
                IsEnabled="False">
 
       </TabItem>
