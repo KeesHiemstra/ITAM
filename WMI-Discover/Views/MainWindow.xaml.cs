@@ -44,14 +44,21 @@ namespace WMI_Discover
       {
         string wMIClassName = ((ComboBox)e.Source).SelectedValue.ToString();
         bool collected = false;
-        //Task.Run(() => { ModelView.SelectWMIClassName(wMIClassName); });
-        //await Task.Run(async() => { collect = await ModelView.SelectWMIClassName(wMIClassName); });
+
         collected = await ModelView.SelectWMIClassName(wMIClassName);
-        WMIPropertiesDataGrid.ItemsSource = ModelView.WMIProperties;
+
+        if (collected)
+        {
+          WMIPropertiesDataGrid.ItemsSource = ModelView.WMIProperties;
+        }
+        else
+        {
+          WMIPropertiesDataGrid.ItemsSource = null;
+        }
       }
-      catch (Exception ex)
+      catch
       {
-        //MessageBox.Show($"WMIClassComboBox_SelectionChanged exception:\n{ex.Message}");
+        WMIPropertiesDataGrid.ItemsSource = null;
       }
     }
 
@@ -63,6 +70,18 @@ namespace WMI_Discover
     private void SearchTextBox_KeyUp(object sender, KeyEventArgs e)
     {
       ModelView.SearchTextBoxOnKey(e);
+    }
+
+    private void PivotTabItem_IsEnabledChanged(object sender, DependencyPropertyChangedEventArgs e)
+    {
+      if (!((bool)e.NewValue))
+      {
+        if (ModelView == null)
+        {
+          return;
+        }
+        ModelView.ActOnPivotTabItem((bool)e.NewValue);
+      }
     }
   }
 }
