@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -7,21 +8,77 @@ using System.Threading.Tasks;
 
 namespace ITAMLib.Models
 {
-  public class WMIPropertiesPivot
+  public class WMIClassPivot
   {
+    private bool _isUpdated = false;
+    private int _propertyCount = -1;
+    private int _collectionCount = -1;
+    private int _memberCount = -1;
+
     private ObservableCollection<WMIProperty> properties { get; }
     private List<string> UniqueNames = new List<string>();
 
     public string ClassName { get; private set; }
-    public int PropertyCount { get; set; } = -1;
-    public int CollectionCount { get; set; } = -1;
-    public int MemberCount { get; set; } = -1;
+    public int PropertyCount
+    {
+      get => _propertyCount;
+      set
+      {
+        if (_propertyCount != value)
+        {
+          _propertyCount = value;
+          IsUpdated = true;
+        }
+      }
+    }
+    public int CollectionCount
+    {
+      get => _collectionCount;
+      set
+      {
+        if (_collectionCount != value)
+        {
+          _collectionCount = value;
+          IsUpdated = true;
+        }
+      }
+    }
+    public int MemberCount
+    {
+      get => _memberCount;
+      set
+      {
+        if (_memberCount != value)
+        {
+          _memberCount = value;
+          IsUpdated = true;
+        }
+      }
+    }
+
+    [JsonIgnore]
+    public bool IsUpdated
+    {
+      get
+      {
+        foreach (bool item in Pivots.Select(x => x.IsUpdated).Distinct().ToList())
+        {
+          _isUpdated = _isUpdated || item;
+        }
+        return _isUpdated;
+      }
+      set => _isUpdated = value;
+    }
 
     public ObservableCollection<WMIPropertyPivot> Pivots = new ObservableCollection<WMIPropertyPivot>();
-    
-    public WMIPropertiesPivot(ObservableCollection<WMIProperty> Properties)
+
+    public WMIClassPivot() { }
+
+    public WMIClassPivot(ObservableCollection<WMIProperty> Properties, string className)
     {
       properties = Properties;
+
+      ClassName = className;
 
       // Count all properties
       PropertyCount = properties.Count();

@@ -148,6 +148,34 @@
         </Grid>
 
       </TabItem>
+
+      <TabItem Name="CodeTabItem"
+               Header="Code"
+               IsEnabled="False">
+
+        <TabControl Name="CodeTabControl"
+                    TabStripPlacement="Bottom">
+
+          <TabItem Name="ClassCodeTabItem"
+                   Header="Class">
+            
+          </TabItem>
+
+          <TabItem Name="ListCodeTabItem"
+                   Header="List">
+
+          </TabItem>
+
+          <TabItem Name="AppCodeTabItem"
+                   Header="Application">
+
+          </TabItem>
+
+        </TabControl>
+        
+        
+      </TabItem>
+      
     </TabControl>
   </Grid>
 </Window>

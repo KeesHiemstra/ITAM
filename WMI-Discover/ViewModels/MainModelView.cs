@@ -16,18 +16,17 @@ namespace WMI_Discover.ViewModels
   public class MainModelView
   {
     private const string JsonFileName = @"C:\Etc\ITAM\WMI\WMIClasses.json";
-    private string JsonClassDataFileName = $"C:\\Etc\\ITAM\\WMI\\{WMIClassName}-Data.json";
-    private string JsonClassPivotFileName = $"C:\\Etc\\ITAM\\WMI\\{WMIClassName}-Pivot.json";
+    private static string JsonClassDataFileName { get { return $"C:\\Etc\\ITAM\\WMI\\{WMIClassName}-Data.json"; } }
+    private static string JsonClassPivotFileName { get { return $"C:\\Etc\\ITAM\\WMI\\{WMIClassName}-Pivot.json"; } }
 
     private MainWindow Main;
     private int _classNameCount = -1;
     private bool WMIClassesUpdated = false;
-    private bool WMIPropertiesPivotUpdated = false;
-
 
     public static ObservableCollection<WMIClass> WMIClasses { get; set; } = new ObservableCollection<WMIClass>();
     public ObservableCollection<WMIProperty> WMIProperties { get; set; } = new ObservableCollection<WMIProperty>();
     public static string WMIClassName { get; set; } = string.Empty; // Selected class name
+    public WMIClassPivot WMIClassPivot { get; set; }
 
     // Search panel
     public static List<string> CategoryNames { get; set; } = new List<string>();
@@ -72,15 +71,15 @@ namespace WMI_Discover.ViewModels
         }
       }
 
-      if (WMIPropertiesPivotUpdated)
+      if ((WMIClassPivot != null) && WMIClassPivot.IsUpdated)
       {
-        //TODO: Save Json
+        SaveWMIClassPivot();
       }
     }
 
     #endregion
 
-    #region Work on the WMIClassNames
+    #region Work on the WMIClassNames filter
 
     public void UpdateFilterWMIClassNames()
     {
@@ -178,13 +177,11 @@ namespace WMI_Discover.ViewModels
       WMIClassName = wMIClassName;
       bool collected = false;
 
-      // Turn off the pivor tab
-      Main.MainTabControl.SelectedIndex = 0;
-      Main.PivotTabItem.IsEnabled = false;
-      Main.PivotDataGrid.ItemsSource = null;
+      // Turn off the pivot tab
+      DisableExtraTabs();
       //WMIPivot = null
 
-      #region Get properties
+      #region Get and save the properties
       if (File.Exists(JsonClassDataFileName))
       {
         try
@@ -322,18 +319,33 @@ namespace WMI_Discover.ViewModels
     {
       try
       {
-        WMIPropertiesPivot pivot = new WMIPropertiesPivot(_WMIProperties);
+        if (File.Exists(JsonClassPivotFileName))
+        {
+          using (StreamReader stream = File.OpenText(JsonClassPivotFileName))
+          {
+            string json = stream.ReadToEnd();
+            WMIClassPivot = JsonConvert.DeserializeObject<WMIClassPivot>(json);
+          }
+          WMIClassPivot.IsUpdated = false;
+        }
+        else
+        {
+          WMIClassPivot = new WMIClassPivot(_WMIProperties, WMIClassName);
+        }
 
-        Main.UniqueNameCountTextBlock.Text = $"{pivot.MemberCount} member{((pivot.MemberCount == 1) ? "" : "s")}";
-        Main.CollectionCountTextBlock.Text = $"{pivot.CollectionCount} collect{((pivot.CollectionCount == 1) ? "y" : "ies")}";
+        Main.UniqueNameCountTextBlock.Text = $"{WMIClassPivot.MemberCount} member{((WMIClassPivot.MemberCount == 1) ? "" : "s")}";
+        Main.CollectionCountTextBlock.Text = $"{WMIClassPivot.CollectionCount} collect{((WMIClassPivot.CollectionCount == 1) ? "y" : "ies")}";
 
-        Main.PropertyHeaderCountTextBlock.Text = $"{pivot.MemberCount * pivot.CollectionCount} properties expected, " + 
-          $"{pivot.PropertyCount} propert{((pivot.PropertyCount == 1) ? "y" : "ies")} counted";
+        Main.PropertyHeaderCountTextBlock.Text = $"{WMIClassPivot.MemberCount * WMIClassPivot.CollectionCount} properties expected, " + 
+          $"{WMIClassPivot.PropertyCount} propert{((WMIClassPivot.PropertyCount == 1) ? "y" : "ies")} counted";
 
-        Main.PivotDataGrid.ItemsSource = pivot.Pivots;
-        Main.PivotTabItem.IsEnabled = true;
+        EnableExtraTabs();
 
-        WMIPropertiesPivotUpdated = true;
+        WMIClassPivot.IsUpdated = !File.Exists(JsonClassPivotFileName);
+        if (WMIClassPivot.IsUpdated)
+        {
+          SaveWMIClassPivot();
+        }
       }
       catch
       {
@@ -341,14 +353,42 @@ namespace WMI_Discover.ViewModels
       }
     }
 
+    private void EnableExtraTabs()
+    {
+      Main.PivotDataGrid.ItemsSource = WMIClassPivot.Pivots;
+      Main.PivotTabItem.IsEnabled = true;
+
+      Main.CodeTabItem.IsEnabled = true;
+    }
+
+    public void DisableExtraTabs()
+    {
+      Main.MainTabControl.SelectedIndex = 0;
+      Main.PivotTabItem.IsEnabled = false;
+      Main.PivotDataGrid.ItemsSource = null;
+
+      Main.CodeTabItem.IsEnabled = false;
+    }
+
     #endregion
 
     public void ActOnPivotTabItem(bool IsEnabledChanged)
     {
-      if (WMIPropertiesPivotUpdated)
+      if (WMIClassPivot.IsUpdated)
       {
-        //TODO: Save Json
+        SaveWMIClassPivot();
       }
     }
+
+    private void SaveWMIClassPivot()
+    {
+      string json = JsonConvert.SerializeObject(WMIClassPivot, Formatting.Indented);
+      using (StreamWriter stream = new StreamWriter(JsonClassPivotFileName))
+      {
+        stream.Write(json);
+      }
+      WMIClassPivot.IsUpdated = false;
+    }
+
   }
 }
