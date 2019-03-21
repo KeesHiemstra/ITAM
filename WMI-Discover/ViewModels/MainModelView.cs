@@ -16,9 +16,14 @@ namespace WMI_Discover.ViewModels
   public class MainModelView
   {
     private const string JsonFileName = @"C:\Etc\ITAM\WMI\WMIClasses.json";
+    private string JsonClassDataFileName = $"C:\\Etc\\ITAM\\WMI\\{WMIClassName}-Data.json";
+    private string JsonClassPivotFileName = $"C:\\Etc\\ITAM\\WMI\\{WMIClassName}-Pivot.json";
+
     private MainWindow Main;
     private int _classNameCount = -1;
     private bool WMIClassesUpdated = false;
+    private bool WMIPropertiesPivotUpdated = false;
+
 
     public static ObservableCollection<WMIClass> WMIClasses { get; set; } = new ObservableCollection<WMIClass>();
     public ObservableCollection<WMIProperty> WMIProperties { get; set; } = new ObservableCollection<WMIProperty>();
@@ -27,7 +32,7 @@ namespace WMI_Discover.ViewModels
     // Search panel
     public static List<string> CategoryNames { get; set; } = new List<string>();
     public static List<string> StatusNames { get; set; } = new List<string>();
-    public string ClassNameContain { get; set; } = string.Empty; // Search box content
+    public string ClassNameContain { get; set; } = "Account";// string.Empty; // Search box content
     public string CategoryName { get; set; } = string.Empty; // Category dropdown content
     public string StatusName { get; set; } = string.Empty; // Status dropdown content
 
@@ -66,36 +71,31 @@ namespace WMI_Discover.ViewModels
           stream.Write(json);
         }
       }
+
+      if (WMIPropertiesPivotUpdated)
+      {
+        //TODO: Save Json
+      }
     }
 
     #endregion
 
-    #region FilterWMIClassNames
+    #region Work on the WMIClassNames
 
-    private IEnumerable<WMIClass> SubFilterWMIClassNames()
+    public void UpdateFilterWMIClassNames()
     {
-      IEnumerable<WMIClass> result = from q in WMIClasses
-                                     select q;
-
-      if (!string.IsNullOrEmpty(ClassNameContain))
+      Main.WMIClassComboBox.ItemsSource = FilterWMIClassNames();
+      string extra = "";
+      if (_classNameCount != 1)
       {
-        result = result
-          .Where(x => x.Name.ToLower().Contains(ClassNameContain.ToLower()));
+        extra = "s";
       }
+      Main.ClassNameCountTextBlock.Text = $"{_classNameCount} class name{extra}";
 
-      if (!string.IsNullOrEmpty(CategoryName))
+      if (WMIProperties.Count != 0)
       {
-        result = result
-          .Where(x => x.Catagory == CategoryName);
+        Main.WMIPropertiesDataGrid.ItemsSource = null;
       }
-
-      if (!string.IsNullOrEmpty(StatusName))
-      {
-        result = result
-          .Where(x => x.Status == StatusName);
-      }
-
-      return result;
     }
 
     private List<string> FilterWMIClassNames()
@@ -130,98 +130,122 @@ namespace WMI_Discover.ViewModels
       return result;
     }
 
-    public void UpdateFilterWMIClassNames()
+    private IEnumerable<WMIClass> SubFilterWMIClassNames()
     {
-      Main.WMIClassComboBox.ItemsSource = FilterWMIClassNames();
-      string extra = "";
-      if (_classNameCount != 1)
-      {
-        extra = "s";
-      }
-      Main.ClassNameCountTextBlock.Text = $"{_classNameCount} class name{extra}";
+      IEnumerable<WMIClass> result = from q in WMIClasses
+                                     select q;
 
-      if (WMIProperties.Count != 0)
+      if (!string.IsNullOrEmpty(ClassNameContain))
       {
-        Main.WMIPropertiesDataGrid.ItemsSource = null;
+        result = result
+          .Where(x => x.Name.ToLower().Contains(ClassNameContain.ToLower()));
+      }
+
+      if (!string.IsNullOrEmpty(CategoryName))
+      {
+        result = result
+          .Where(x => x.Catagory == CategoryName);
+      }
+
+      if (!string.IsNullOrEmpty(StatusName))
+      {
+        result = result
+          .Where(x => x.Status == StatusName);
+      }
+
+      return result;
+    }
+
+    #endregion
+
+    #region Act on selections of SearchBox has effect on the WMIClassNames
+
+    public void SearchTextBoxOnKey(KeyEventArgs e)
+    {
+      if (e.Key == Key.Enter)
+      {
+        Main.WMIClassComboBox.Focus(); // Forces to send the box content to memory
+        UpdateFilterWMIClassNames();
       }
     }
 
     #endregion
 
-    #region Acting on changes
+    #region Act on selected WMIClassName [WMIClasses]
 
     public async Task<bool> SelectWMIClassName(string wMIClassName)
     {
       WMIClassName = wMIClassName;
-      string fileName = $"C:\\Etc\\ITAM\\WMI\\{WMIClassName}-Data.json";
-      bool result = false;
+      bool collected = false;
 
-      if (File.Exists(fileName))
+      // Turn off the pivor tab
+      Main.MainTabControl.SelectedIndex = 0;
+      Main.PivotTabItem.IsEnabled = false;
+      Main.PivotDataGrid.ItemsSource = null;
+      //WMIPivot = null
+
+      #region Get properties
+      if (File.Exists(JsonClassDataFileName))
       {
         try
         {
-          using (StreamReader stream = File.OpenText(fileName))
+          using (StreamReader stream = File.OpenText(JsonClassDataFileName))
           {
             string json = await stream.ReadToEndAsync();
             WMIProperties = JsonConvert.DeserializeObject<ObservableCollection<WMIProperty>>(json);
           }
+          collected = true;
         }
         catch (Exception ex)
         {
-          MessageBox.Show($"Error reading json [{fileName}]:\n{ex.Message}", "Exception", MessageBoxButton.OK, MessageBoxImage.Warning);
+          MessageBox.Show($"Error reading json [{JsonClassDataFileName}]:\n{ex.Message}", "Exception", MessageBoxButton.OK, MessageBoxImage.Warning);
         }
         ReadWMIPropertiesFromFile = true;
       }
       else
       {
         ReadWMIPropertiesFromFile = false;
-        result = await CollectWMIClass();
+        collected = await CollectWMIClass();
 
-        if (result && WMIProperties.Count > 0)
+        if (collected && WMIProperties.Count > 0)
         {
           string json = JsonConvert.SerializeObject(WMIProperties, Formatting.Indented);
-          using (StreamWriter stream = new StreamWriter(fileName))
+          using (StreamWriter stream = new StreamWriter(JsonClassDataFileName))
           {
             await stream.WriteAsync(json);
           }
 
-          UpdateWMIClassesRecord("OK");
+          UpdateWMIClassCollection("OK");
           WMIClassesUpdated = true;
         }
-        else if (!result)
+        else if (!collected)
         {
-          UpdateWMIClassesRecord("Error");
+          UpdateWMIClassCollection("Error");
           WMIClassesUpdated = true;
         }
         else if (WMIProperties.Count == 0)
         {
-          UpdateWMIClassesRecord("Empty");
+          UpdateWMIClassCollection("Empty");
           WMIClassesUpdated = true;
         }
       }
+      #endregion
 
+      #region MainWindow <PropertiesCountTextBlock> update
       string extra = "y";
       if (WMIProperties.Count != 1)
       {
         extra = "ies";
       }
-      Main.PropertiesCountTextBlock.Text = $"{WMIProperties.Count} propert{extra}";
+      Main.PropertiesCountTextBlock.Text = $"{WMIProperties.Count} propert{extra}"; // property or properties
+      #endregion
 
-      return result;
-    }
+      if (collected)
+      {
+        await GetWMIClassCollectionPivot(WMIProperties);
+      }
 
-    private void UpdateWMIClassesRecord(string status)
-    {
-      IEnumerable<WMIClass> result = from q in WMIClasses
-                                     select q;
-
-      result = result
-        .Where(x => x.Name == WMIClassName);
-
-      WMIClass record = result
-          .SingleOrDefault();
-
-      record.Status = status;
+      return collected;
     }
 
     private async Task<bool> CollectWMIClass()
@@ -276,19 +300,55 @@ namespace WMI_Discover.ViewModels
       return true;
     }
 
-    #endregion
-
-    #region Acting on SearchBox
-
-    public void SearchTextBoxOnKey(KeyEventArgs e)
+    private void UpdateWMIClassCollection(string status)
     {
-      if (e.Key == Key.Enter)
+      IEnumerable<WMIClass> result = from q in WMIClasses
+                                     select q;
+
+      result = result
+        .Where(x => x.Name == WMIClassName);
+
+      WMIClass record = result
+          .SingleOrDefault();
+
+      record.Status = status;
+    }
+
+    #endregion
+    
+    #region Create pivot for success loaded WMIClass
+
+    private async Task GetWMIClassCollectionPivot(ObservableCollection<WMIProperty> _WMIProperties)
+    {
+      try
       {
-        Main.WMIClassComboBox.Focus(); // Forces to send the box content to memory
-        UpdateFilterWMIClassNames();
+        WMIPropertiesPivot pivot = new WMIPropertiesPivot(_WMIProperties);
+
+        Main.UniqueNameCountTextBlock.Text = $"{pivot.MemberCount} member{((pivot.MemberCount == 1) ? "" : "s")}";
+        Main.CollectionCountTextBlock.Text = $"{pivot.CollectionCount} collect{((pivot.CollectionCount == 1) ? "y" : "ies")}";
+
+        Main.PropertyHeaderCountTextBlock.Text = $"{pivot.MemberCount * pivot.CollectionCount} properties expected, " + 
+          $"{pivot.PropertyCount} propert{((pivot.PropertyCount == 1) ? "y" : "ies")} counted";
+
+        Main.PivotDataGrid.ItemsSource = pivot.Pivots;
+        Main.PivotTabItem.IsEnabled = true;
+
+        WMIPropertiesPivotUpdated = true;
+      }
+      catch
+      {
+
       }
     }
 
     #endregion
+
+    public void ActOnPivotTabItem(bool IsEnabledChanged)
+    {
+      if (WMIPropertiesPivotUpdated)
+      {
+        //TODO: Save Json
+      }
+    }
   }
 }

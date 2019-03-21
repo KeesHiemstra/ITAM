@@ -86,7 +86,6 @@
                     CanUserAddRows="False"
                     CanUserDeleteRows="False">
             <DataGrid.Columns>
-              <DataGridCheckBoxColumn Header="Select" Binding="{Binding Select}" />
               <DataGridTextColumn Header="Coll" Binding="{Binding CollectionIndex}" IsReadOnly="True"/>
               <DataGridTextColumn Header="Prop" Binding="{Binding PropertyIndex}" IsReadOnly="True"/>
               <DataGridTextColumn Header="Name" Binding="{Binding Name}" IsReadOnly="True"/>
@@ -101,7 +100,52 @@
       </TabItem>
       <TabItem Name="PivotTabItem"
                Header="Pivot"
-               IsEnabled="False">
+               IsEnabled="False"
+               IsEnabledChanged="PivotTabItem_IsEnabledChanged">
+
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+          </Grid.RowDefinitions>
+
+          <Border BorderBrush="LightGray"
+                  Margin="0,0,0,10"
+                  Padding="10,0,10,0">
+            <StackPanel Orientation="Vertical"
+                      Grid.Row="0">
+
+              <TextBlock Name="UniqueNameCountTextBlock"/>
+              <TextBlock Name="CollectionCountTextBlock"/>
+              <TextBlock Name="PropertyHeaderCountTextBlock"/>
+
+            </StackPanel>
+          </Border>
+          
+
+          <DataGrid Name="PivotDataGrid"
+                    ItemsSource="{Binding}"
+                    HorizontalScrollBarVisibility="Visible"
+                    VerticalScrollBarVisibility="Visible"
+                    AutoGenerateColumns="False"
+                    CanUserAddRows="False"
+                    CanUserDeleteRows="False"
+                    Grid.Row="1">
+
+            <DataGrid.Columns>
+              <DataGridCheckBoxColumn Header="Select" Binding="{Binding Select}"/>
+              <DataGridTextColumn Header="Name" Binding="{Binding Name}" IsReadOnly="True"/>
+              <DataGridTextColumn Header="Type" Binding="{Binding Type}" IsReadOnly="True"/>
+              <DataGridTextColumn Header="Type #" Binding="{Binding TypeCount}" IsReadOnly="True"/>
+              <DataGridTextColumn Header="Occur" Binding="{Binding TypeOcc}" IsReadOnly="True"/>
+              <DataGridTextColumn Header="Value" Binding="{Binding ValueCount}" IsReadOnly="True"/>
+              <DataGridTextColumn Header="Unique" Binding="{Binding ValueUniqueCount}" IsReadOnly="True"/>
+              <DataGridTextColumn Header="Clean" Binding="{Binding ValueCleanCount}" IsReadOnly="True"/>
+            </DataGrid.Columns>
+            
+          </DataGrid>
+
+        </Grid>
 
       </TabItem>
     </TabControl>

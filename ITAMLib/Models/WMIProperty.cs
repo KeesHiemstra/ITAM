@@ -9,7 +9,6 @@ namespace ITAMLib.Models
 {
   public class WMIProperty
   {
-    public bool Select { get; set; }
     public int CollectionIndex { get; set; }
     public int PropertyIndex { get; set; }
     public string Name { get; set; }
