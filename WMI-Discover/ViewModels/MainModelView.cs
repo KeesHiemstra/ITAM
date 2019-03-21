@@ -72,6 +72,32 @@ namespace WMI_Discover.ViewModels
 
     #region FilterWMIClassNames
 
+    private IEnumerable<WMIClass> SubFilterWMIClassNames()
+    {
+      IEnumerable<WMIClass> result = from q in WMIClasses
+                                     select q;
+
+      if (!string.IsNullOrEmpty(ClassNameContain))
+      {
+        result = result
+          .Where(x => x.Name.ToLower().Contains(ClassNameContain.ToLower()));
+      }
+
+      if (!string.IsNullOrEmpty(CategoryName))
+      {
+        result = result
+          .Where(x => x.Catagory == CategoryName);
+      }
+
+      if (!string.IsNullOrEmpty(StatusName))
+      {
+        result = result
+          .Where(x => x.Status == StatusName);
+      }
+
+      return result;
+    }
+
     private List<string> FilterWMIClassNames()
     {
       IEnumerable<WMIClass> queryWMIClassNames = SubFilterWMIClassNames();
@@ -100,32 +126,6 @@ namespace WMI_Discover.ViewModels
         .ToList();
 
       Main.StatusComboBox.ItemsSource = StatusNames;
-
-      return result;
-    }
-
-    private IEnumerable<WMIClass> SubFilterWMIClassNames()
-    {
-      IEnumerable<WMIClass> result = from q in WMIClasses
-                                     select q;
-
-      if (!string.IsNullOrEmpty(ClassNameContain))
-      {
-        result = result
-          .Where(x => x.Name.ToLower().Contains(ClassNameContain.ToLower()));
-      }
-
-      if (!string.IsNullOrEmpty(CategoryName))
-      {
-        result = result
-          .Where(x => x.Catagory == CategoryName);
-      }
-
-      if (!string.IsNullOrEmpty(StatusName))
-      {
-        result = result
-          .Where(x => x.Status == StatusName);
-      }
 
       return result;
     }

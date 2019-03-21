@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\WMIClass.cs" />
-    <Compile Include="Models\WMIPropertiesResult.cs" />
+    <Compile Include="Models\WMIPropertiesPivot.cs" />
     <Compile Include="Models\WMIProperty.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
