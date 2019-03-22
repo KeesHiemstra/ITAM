@@ -59,6 +59,9 @@
 
       <Separator Margin="0,10,10,10"/>
 
+      <TextBlock Name="ClassResultTextBlock"
+                 Foreground="Red"
+                 Visibility="Collapsed"/>
       <TextBlock Name="PropertiesCountTextBlock"/>
 
     </StackPanel>
