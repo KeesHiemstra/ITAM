@@ -46,7 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\WMIClass.cs" />
-    <Compile Include="Models\WMIPropertiesPivot.cs" />
+    <Compile Include="Models\WMIClassPivot.cs" />
     <Compile Include="Models\WMIProperty.cs" />
     <Compile Include="Models\WMIPropertyPivot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

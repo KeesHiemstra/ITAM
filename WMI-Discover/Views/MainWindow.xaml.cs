@@ -42,7 +42,15 @@ namespace WMI_Discover
     {
       try
       {
-        string wMIClassName = ((ComboBox)e.Source).SelectedValue.ToString();
+        string wMIClassName;
+
+        if (((ComboBox)e.Source).SelectedValue == null)
+        {
+          wMIClassName = string.Empty;
+          ModelView.DisableExtraTabs();
+          return;
+        }
+        wMIClassName = ((ComboBox)e.Source).SelectedValue.ToString();
         bool collected = false;
 
         collected = await ModelView.SelectWMIClassName(wMIClassName);
