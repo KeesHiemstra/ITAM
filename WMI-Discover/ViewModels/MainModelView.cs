@@ -25,7 +25,7 @@ namespace WMI_Discover.ViewModels
 
 		public static ObservableCollection<WMIClass> WMIClasses { get; set; } = new ObservableCollection<WMIClass>();
 		public ObservableCollection<WMIProperty> WMIProperties { get; set; } = new ObservableCollection<WMIProperty>();
-		public static string WMIClassName { get; set; } = string.Empty; // Selected class name
+		public static string WMIClassName { get; set; } // Selected class name
 		public WMIClassPivot WMIClassPivot { get; set; }
 
 		// Search panel
@@ -375,6 +375,9 @@ namespace WMI_Discover.ViewModels
 			Main.PivotDataGrid.ItemsSource = WMIClassPivot.Pivots;
 			Main.PivotTabItem.IsEnabled = true;
 
+			Main.ClassCodeTextBox.Text = CodeModelView.ClassCode(WMIClassPivot);
+			Main.ClassListTextBox.Text = CodeModelView.ClassList(WMIClassPivot);
+			Main.ClassAppTextBox.Text = CodeModelView.ClassApp(WMIClassPivot);
 			Main.CodeTabItem.IsEnabled = true;
 		}
 
