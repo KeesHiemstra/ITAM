@@ -47,8 +47,10 @@ namespace WMI_Explorer
     {
       WMIProperties.Clear();
 
-      ConnectionOptions options = new ConnectionOptions();
-      options.Impersonation = System.Management.ImpersonationLevel.Impersonate;
+      ConnectionOptions options = new ConnectionOptions
+      {
+        Impersonation = System.Management.ImpersonationLevel.Impersonate
+      };
 
       ManagementScope scope = new ManagementScope("\\\\.\\root\\cimv2", options);
       scope.Connect();
@@ -73,7 +75,7 @@ namespace WMI_Explorer
             WMIProperties.Add(new WMIProperty(collectionIndex, propertyIndex, propertyData));
             propertyIndex++;
           }
-          App.Log($"Added WMI record ({collectionIndex})");
+          //App.Log($"Added WMI record ({collectionIndex})");
           collectionIndex++;
         }
       }
