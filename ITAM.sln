@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WMI-Classes", "WMI-Classes\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITAMLib", "ITAMLib\ITAMLib.csproj", "{672B3F2B-026D-4466-8CB6-7288ACB8969A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory", "Inventory\Inventory.csproj", "{D8A30F69-4AA2-4C3B-8AB1-63378C986367}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{672B3F2B-026D-4466-8CB6-7288ACB8969A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{672B3F2B-026D-4466-8CB6-7288ACB8969A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{672B3F2B-026D-4466-8CB6-7288ACB8969A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8A30F69-4AA2-4C3B-8AB1-63378C986367}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8A30F69-4AA2-4C3B-8AB1-63378C986367}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8A30F69-4AA2-4C3B-8AB1-63378C986367}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8A30F69-4AA2-4C3B-8AB1-63378C986367}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
