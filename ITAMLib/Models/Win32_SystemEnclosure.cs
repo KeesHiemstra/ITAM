@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace ITAMLib.Models
 {
-	public class Win32_BaseBoard
+	public class Win32_SystemEnclosure
 	{
 		public string Manufacturer { get; set; }
-		public string Product { get; set; }
 		public string SerialNumber { get; set; }
+		public string SMBIOSAssetTag { get; set; }
 		public string Version { get; set; }
 
-		public Win32_BaseBoard(WMIRecord data)
+		public Win32_SystemEnclosure(WMIRecord data)
 		{
 			Manufacturer = data.Properties["Manufacturer"];
-			Product = data.Properties["Product"];
 			SerialNumber = data.Properties["SerialNumber"];
+			SMBIOSAssetTag = data.Properties["SMBIOSAssetTag"];
 			Version = data.Properties["Version"];
 		}
 	}

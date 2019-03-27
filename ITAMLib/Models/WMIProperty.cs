@@ -9,18 +9,14 @@ namespace ITAMLib.Models
 {
   public class WMIProperty
   {
-    public int CollectionIndex { get; set; }
-    public int PropertyIndex { get; set; }
     public string Name { get; set; }
     public string Type { get; set; }
     public string Value { get; set; }
 
     public WMIProperty() { }
 
-    public WMIProperty(int collectionIndex, int propertyIndex, PropertyData data)
+    public WMIProperty(PropertyData data)
     {
-      CollectionIndex = collectionIndex;
-      PropertyIndex = propertyIndex;
       Name = data.Name;
       Type = data.Type.ToString();
       if (data.Value == null)

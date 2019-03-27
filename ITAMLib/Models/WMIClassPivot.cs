@@ -96,7 +96,7 @@ namespace ITAMLib.Models
 			PropertyCount = properties.Count();
 
 			// Count the number of collections
-			CollectionCount = properties.Max(x => x.CollectionIndex) + 1;
+			//CollectionCount = properties.Max(x => x.CollectionIndex) + 1;
 
 			// List all unique property Name
 			UniqueNames = CreateUniqueNames();

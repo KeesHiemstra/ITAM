@@ -46,12 +46,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ITAMInventory.cs" />
+    <Compile Include="Models\Win32_Account.cs" />
+    <Compile Include="Models\Win32_Account_List.cs" />
     <Compile Include="Models\Win32_BaseBoard.cs" />
     <Compile Include="Models\Win32_BaseBoard_List.cs" />
+    <Compile Include="Models\Win32_BIOS.cs" />
+    <Compile Include="Models\Win32_BIOS_List.cs" />
+    <Compile Include="Models\Win32_ComputerSystem.cs" />
+    <Compile Include="Models\Win32_ComputerSystem_List.cs" />
+    <Compile Include="Models\Win32_OperatingSystem.cs" />
+    <Compile Include="Models\Win32_OperatingSystem_List.cs" />
+    <Compile Include="Models\Win32_SystemEnclosure.cs" />
+    <Compile Include="Models\Win32_SystemEnclosure_List.cs" />
     <Compile Include="Models\WMIClass.cs" />
     <Compile Include="Models\WMIClassPivot.cs" />
+    <Compile Include="Models\WMIList.cs" />
     <Compile Include="Models\WMIProperty.cs" />
     <Compile Include="Models\WMIPropertyPivot.cs" />
+    <Compile Include="Models\WMIRecord.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
