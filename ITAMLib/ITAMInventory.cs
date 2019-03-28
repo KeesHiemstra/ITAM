@@ -10,6 +10,12 @@ namespace ITAMLib
 	public class ITAMInventory
 	{
 		public string ComputerName { get; set; } = Environment.MachineName;
+		public string UserName { get; set; } = Environment.UserName;
+		public string UserDomainName { get; set; } = Environment.UserDomainName;
+		public string OSVersion { get; set; } = Environment.OSVersion.ToString();
+		public string Version { get; set; } = Environment.Version.ToString();
+		public string InventoryVersion { get; set; } = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+		public bool UserInteractive { get; set; } = Environment.UserInteractive;
 
 		public Win32_BaseBoard_List win32_BaseBoard = new Win32_BaseBoard_List("Win32_BaseBoard", "Manufacturer,Product,SerialNumber,Version");
 
@@ -22,5 +28,7 @@ namespace ITAMLib
 		public Win32_Account_List win32_Account = new Win32_Account_List("Win32_Account", "Caption,Description,Disabled,Domain,LocalAccount,Name,SID,SIDType,Status");
 
 		public Win32_BIOS_List win32_BIOS = new Win32_BIOS_List("Win32_BIOS", "Manufacturer,Name,ReleaseDate,SerialNumber,Version");
+
+		public Win32_Product_List win32_Product = new Win32_Product_List("Win32_Product", "HelpLink,IdentifyingNumber,InstallDate,InstallLocation,InstallSource,LocalPackage,Name,PackageCache,PackageCode,PackageName,URLInfoAbout,URLUpdateInfo,Vendor,Version");
 	}
 }

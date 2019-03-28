@@ -57,6 +57,8 @@
     <Compile Include="Models\Win32_ComputerSystem_List.cs" />
     <Compile Include="Models\Win32_OperatingSystem.cs" />
     <Compile Include="Models\Win32_OperatingSystem_List.cs" />
+    <Compile Include="Models\Win32_Product.cs" />
+    <Compile Include="Models\Win32_Product_List.cs" />
     <Compile Include="Models\Win32_SystemEnclosure.cs" />
     <Compile Include="Models\Win32_SystemEnclosure_List.cs" />
     <Compile Include="Models\WMIClass.cs" />
