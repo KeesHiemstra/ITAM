@@ -13,6 +13,8 @@ namespace ITAMLib.Models
 	{
 		public List<Win32_BaseBoard> Items = new List<Win32_BaseBoard>();
 
+		public Win32_BaseBoard_List() { }
+
 		public Win32_BaseBoard_List(string WMIClass, string members)
 		{
 			CollectWmiClass(WMIClass, members);
