@@ -12,6 +12,8 @@ namespace ITAMLib.Models
 	{
 		public List<Win32_ComputerSystem> Items = new List<Win32_ComputerSystem>();
 
+		public Win32_ComputerSystem_List() { }
+
 		public Win32_ComputerSystem_List(string WMIClass, string members)
 		{
 			CollectWmiClass(WMIClass, members);
