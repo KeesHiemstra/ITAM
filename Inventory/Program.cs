@@ -28,7 +28,11 @@ namespace Inventory
 			Console.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} Inventory completed");
 
 			string json = JsonConvert.SerializeObject(Inventory, Formatting.Indented);
+#if DEBUG
+			using (StreamWriter stream = new StreamWriter($"C:\\Etc\\WMI\\Inventory-{Environment.MachineName}.json"))
+#else
 			using (StreamWriter stream = new StreamWriter($"\\\\NASServer\\Data\\Kees\\Inventory-{Environment.MachineName}.json"))
+#endif
 			{
 				stream.Write(json);
 			}
