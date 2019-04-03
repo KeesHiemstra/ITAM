@@ -30,6 +30,7 @@ namespace ITAM_Software
 			Title += $" ({System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString()})";
 
 			ModelView = new MainModelView(this);
+			FilesListView.ItemsSource = ModelView.JsonFiles;
 		}
 	}
 }

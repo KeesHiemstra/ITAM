@@ -12,6 +12,8 @@ namespace Inventory
 {
 	class Program
 	{
+		public static string JsonPath;
+
 		static void Main(string[] args)
 		{
 			Console.WriteLine($"Inventory version: {System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString()}");
@@ -24,15 +26,29 @@ namespace Inventory
 
 			Console.WriteLine();
 			Console.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} Start inventory");
+
+			if (File.Exists("\\\\NASServer\\Data\\Kees\\Inventory.exe"))
+			{
+				JsonPath = "\\\\NASServer\\Data\\Kees\\Inventory";
+			}
+			else if (Directory.Exists("C:\\Users\\Kees\\OneDrive\\Etc\\ITAM\\Inventory"))
+			{
+				JsonPath = "C:\\Users\\Kees\\OneDrive\\Etc\\ITAM\\Inventory";
+			}
+			else if (Directory.Exists("C:\\Etc\\ITAM\\Inventory"))
+			{
+				JsonPath = "C:\\Etc\\ITAM\\Inventory";
+			}
+			else
+			{
+				return;
+			}
+
 			ITAMInventory Inventory = new ITAMInventory();
 			Console.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} Inventory completed");
 
 			string json = JsonConvert.SerializeObject(Inventory, Formatting.Indented);
-#if DEBUG
-			using (StreamWriter stream = new StreamWriter($"C:\\Etc\\WMI\\Inventory-{Environment.MachineName}.json"))
-#else
-			using (StreamWriter stream = new StreamWriter($"\\\\NASServer\\Data\\Kees\\Inventory-{Environment.MachineName}.json"))
-#endif
+			using (StreamWriter stream = new StreamWriter(JsonPath + $"\\Inventory-{Environment.MachineName}.json"))
 			{
 				stream.Write(json);
 			}

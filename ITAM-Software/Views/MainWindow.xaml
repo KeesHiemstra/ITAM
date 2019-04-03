@@ -6,7 +6,15 @@
         xmlns:local="clr-namespace:ITAM_Software"
         mc:Ignorable="d"
         Title="ITAM Software" Height="450" Width="800">
-    <Grid Margin="10">
-        
-    </Grid>
+  <Grid Margin="10">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="150"/>
+      <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+
+    <ListView Name="FilesListView"
+              Grid.Column="0">
+      
+    </ListView>
+  </Grid>
 </Window>
