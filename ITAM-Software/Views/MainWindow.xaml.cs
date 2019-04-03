@@ -32,5 +32,11 @@ namespace ITAM_Software
 			ModelView = new MainModelView(this);
 			FilesListView.ItemsSource = ModelView.JsonFiles;
 		}
+
+		private void FilesListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			//string selected = (string)((ListView)e.Source).SelectedValue;
+			ModelView.SelectedWMIClass((string)((ListView)e.Source).SelectedValue);
+		}
 	}
 }

@@ -12,7 +12,7 @@ namespace ITAMLib.Models
 	{
 		public List<Win32_Account> Items = new List<Win32_Account>();
 
-		Win32_Account_List() { }
+		public Win32_Account_List() { }
 
 		public Win32_Account_List(string WMIClass, string members)
 		{

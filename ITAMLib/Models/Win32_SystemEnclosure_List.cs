@@ -12,7 +12,7 @@ namespace ITAMLib.Models
 	{
 		public List<Win32_SystemEnclosure> Items = new List<Win32_SystemEnclosure>();
 
-		Win32_SystemEnclosure_List() { }
+		public Win32_SystemEnclosure_List() { }
 
 		public Win32_SystemEnclosure_List(string WMIClass, string members)
 		{

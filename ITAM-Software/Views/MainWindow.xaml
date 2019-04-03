@@ -13,7 +13,7 @@
     </Grid.ColumnDefinitions>
 
     <ListView Name="FilesListView"
-              Grid.Column="0">
+              Grid.Column="0" SelectionChanged="FilesListView_SelectionChanged">
       
     </ListView>
   </Grid>

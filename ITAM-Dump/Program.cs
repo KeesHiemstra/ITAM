@@ -15,7 +15,7 @@ namespace ITAM_Dump
 
 		static void Main(string[] args)
 		{
-			GetDump("W:\\Kees\\Inventory-PC06.json");
+			GetDump("W:\\Kees\\Inventory\\Inventory-PC06.json");
 
 			Console.Write("\nPress any key...");
 			Console.ReadKey();
