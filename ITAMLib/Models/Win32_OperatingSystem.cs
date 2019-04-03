@@ -38,6 +38,8 @@ namespace ITAMLib.Models
 		public string Version { get; set; }
 		public string WindowsDirectory { get; set; }
 
+		public Win32_OperatingSystem() { }
+
 		public Win32_OperatingSystem(WMIRecord data)
 		{
 			BootDevice = data.Properties["BootDevice"];

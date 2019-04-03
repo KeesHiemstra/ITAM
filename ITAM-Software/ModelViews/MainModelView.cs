@@ -64,7 +64,6 @@ namespace ITAM_Software.ModelViews
 				string json = stream.ReadToEnd();
 				Inventory = JsonConvert.DeserializeObject<ITAMInventory>(json);
 			}
-			var x = Inventory.ComputerName;
 		}
 	}
 }

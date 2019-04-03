@@ -29,6 +29,8 @@ namespace ITAMLib.Models
 		public string UserName { get; set; }
 		public string Workgroup { get; set; }
 
+		public Win32_ComputerSystem() { }
+
 		public Win32_ComputerSystem(WMIRecord data)
 		{
 			AdminPasswordStatus = data.Properties["AdminPasswordStatus"];

@@ -23,6 +23,8 @@ namespace ITAMLib.Models
 		public string URLInfoAbout { get; set; }
 		public string URLUpdateInfo { get; set; }
 
+		public Win32_Product() { }
+
 		public Win32_Product(WMIRecord data)
 		{
 			HelpLink = data.Properties["HelpLink"];
