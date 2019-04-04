@@ -13,6 +13,8 @@ namespace ITAMLib.Models
 		public string SMBIOSAssetTag { get; set; }
 		public string Version { get; set; }
 
+		public Win32_SystemEnclosure() { }
+
 		public Win32_SystemEnclosure(WMIRecord data)
 		{
 			Manufacturer = data.Properties["Manufacturer"];

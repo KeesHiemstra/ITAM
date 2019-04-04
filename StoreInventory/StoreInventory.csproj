@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D8A30F69-4AA2-4C3B-8AB1-63378C986367}</ProjectGuid>
+    <ProjectGuid>{06CC38C4-9F58-4602-B9C2-1655E7B447A4}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Inventory</RootNamespace>
-    <AssemblyName>Inventory</AssemblyName>
+    <RootNamespace>StoreInventory</RootNamespace>
+    <AssemblyName>StoreInventory</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -46,7 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ITAMInventoryX.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -56,7 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ITAMLib\ITAMLib.csproj">
-      <Project>{672b3f2b-026d-4466-8cb6-7288acb8969a}</Project>
+      <Project>{672B3F2B-026D-4466-8CB6-7288ACB8969A}</Project>
       <Name>ITAMLib</Name>
     </ProjectReference>
   </ItemGroup>

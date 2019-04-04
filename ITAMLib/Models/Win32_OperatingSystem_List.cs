@@ -12,6 +12,8 @@ namespace ITAMLib.Models
 	{
 		public List<Win32_OperatingSystem> Items = new List<Win32_OperatingSystem>();
 
+		public Win32_OperatingSystem_List() { }
+
 		public Win32_OperatingSystem_List(string WMIClass, string members)
 		{
 			CollectWmiClass(WMIClass, members);

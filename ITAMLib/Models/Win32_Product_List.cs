@@ -8,13 +8,13 @@ using System.Windows;
 
 namespace ITAMLib.Models
 {
-	public class Win32_Account_List
+	public class Win32_Product_List
 	{
-		public List<Win32_Account> Items = new List<Win32_Account>();
+		public List<Win32_Product> Items = new List<Win32_Product>();
 
-		public Win32_Account_List() { }
+		public Win32_Product_List() { }
 
-		public Win32_Account_List(string WMIClass, string members)
+		public Win32_Product_List(string WMIClass, string members)
 		{
 			CollectWmiClass(WMIClass, members);
 		}
@@ -32,12 +32,12 @@ namespace ITAMLib.Models
 					{
 						record.ProcessProperty(propertyData);
 					}
-					Items.Add(new Win32_Account(record));
+					Items.Add(new Win32_Product(record));
 				}
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show($"Querying the WMI Win32_Account has an exception:\n{ex.Message}", "Exception", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+				MessageBox.Show($"Querying the WMI Win32_Product has an exception:\n{ex.Message}", "Exception", MessageBoxButton.OK, MessageBoxImage.Exclamation);
 			}
 		}
 	}

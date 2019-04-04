@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D8A30F69-4AA2-4C3B-8AB1-63378C986367}</ProjectGuid>
+    <ProjectGuid>{76A0A923-8C2A-450D-8746-843B56E46289}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Inventory</RootNamespace>
-    <AssemblyName>Inventory</AssemblyName>
+    <RootNamespace>ITAM_Dump</RootNamespace>
+    <AssemblyName>ITAM-Dump</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -46,7 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ITAMInventoryX.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -56,7 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ITAMLib\ITAMLib.csproj">
-      <Project>{672b3f2b-026d-4466-8cb6-7288acb8969a}</Project>
+      <Project>{672B3F2B-026D-4466-8CB6-7288ACB8969A}</Project>
       <Name>ITAMLib</Name>
     </ProjectReference>
   </ItemGroup>

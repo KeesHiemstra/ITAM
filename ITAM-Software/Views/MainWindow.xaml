@@ -1,0 +1,36 @@
+﻿<Window x:Class="ITAM_Software.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ITAM_Software"
+        mc:Ignorable="d"
+        Title="ITAM Software" Height="450" Width="800">
+  <Grid Margin="10">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="150"/>
+      <ColumnDefinition Width="*"/>
+    </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
+
+    <ListView Name="FilesListView"
+              Grid.Column="0"
+              Grid.RowSpan="2"
+              SelectionChanged="FilesListView_SelectionChanged">
+
+    </ListView>
+
+    <TextBlock Name="WMIClassTextBlock"
+               Margin="10,0,5,5"
+               Grid.Column="1"
+               Grid.Row="0"/>
+    <DataGrid Name="WMIClassDataGrid"
+              Grid.Column="1"
+              Grid.Row="1">
+
+    </DataGrid>
+  </Grid>
+</Window>
