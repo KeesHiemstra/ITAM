@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITAM-Dump", "ITAM-Dump\ITAM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITAM-Software", "ITAM-Software\ITAM-Software.csproj", "{679F0148-5996-41FB-A7DE-86087174B3F2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreInventory", "StoreInventory\StoreInventory.csproj", "{06CC38C4-9F58-4602-B9C2-1655E7B447A4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{679F0148-5996-41FB-A7DE-86087174B3F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{679F0148-5996-41FB-A7DE-86087174B3F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{679F0148-5996-41FB-A7DE-86087174B3F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06CC38C4-9F58-4602-B9C2-1655E7B447A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06CC38C4-9F58-4602-B9C2-1655E7B447A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06CC38C4-9F58-4602-B9C2-1655E7B447A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06CC38C4-9F58-4602-B9C2-1655E7B447A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
