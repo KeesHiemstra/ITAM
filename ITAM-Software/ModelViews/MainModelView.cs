@@ -64,7 +64,9 @@ namespace ITAM_Software.ModelViews
 				string json = stream.ReadToEnd();
 				Inventory = JsonConvert.DeserializeObject<ITAMInventory>(json);
 			}
-			var x = Inventory.ComputerName;
+
+			Main.WMIClassTextBlock.Text = Inventory.ComputerName;
+			Main.WMIClassDataGrid.ItemsSource = Inventory.win32_Product.Items;
 		}
 	}
 }

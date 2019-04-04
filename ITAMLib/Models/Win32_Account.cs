@@ -18,6 +18,8 @@ namespace ITAMLib.Models
 		public string SIDType { get; set; }
 		public string Status { get; set; }
 
+		public Win32_Account() { }
+
 		public Win32_Account(WMIRecord data)
 		{
 			Caption = data.Properties["Caption"];

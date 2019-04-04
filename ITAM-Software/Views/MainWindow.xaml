@@ -11,10 +11,26 @@
       <ColumnDefinition Width="150"/>
       <ColumnDefinition Width="*"/>
     </Grid.ColumnDefinitions>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="*"/>
+    </Grid.RowDefinitions>
 
     <ListView Name="FilesListView"
-              Grid.Column="0" SelectionChanged="FilesListView_SelectionChanged">
-      
+              Grid.Column="0"
+              Grid.RowSpan="2"
+              SelectionChanged="FilesListView_SelectionChanged">
+
     </ListView>
+
+    <TextBlock Name="WMIClassTextBlock"
+               Margin="10,0,5,5"
+               Grid.Column="1"
+               Grid.Row="0"/>
+    <DataGrid Name="WMIClassDataGrid"
+              Grid.Column="1"
+              Grid.Row="1">
+
+    </DataGrid>
   </Grid>
 </Window>
