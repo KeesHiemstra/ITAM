@@ -14,11 +14,13 @@ namespace StoreInventory
 		public static string JsonPath;
 		public static ITAMInventory Inventory;
 
+		private readonly ITAMDbContext _context;
+		public Program(ITAMDbContext context) { _context = context; }
+
 		static void Main(string[] args)
 		{
 			GetJsonPath();
 			GetJsonFiles();
-
 
 			Console.Write("\nPress any key...");
 			Console.ReadKey();
@@ -35,7 +37,24 @@ namespace StoreInventory
 				{
 					string json = stream.ReadToEnd();
 					Inventory = JsonConvert.DeserializeObject<ITAMInventory>(json);
+
+					ImportJson();
 				}
+			}
+		}
+
+		private static void ImportJson()
+		{
+			Console.WriteLine(Inventory.ComputerName);
+
+			using (Win32_Product_SQL product_SQL = new Win32_Product_SQL())
+			{
+				foreach (var item in Inventory.win32_Product.Items)
+				{
+					product_SQL.ComputerName = Inventory.ComputerName;
+
+				}
+				
 			}
 		}
 
