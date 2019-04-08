@@ -44,7 +44,7 @@ namespace Inventory
 				return;
 			}
 
-			ITAMInventory Inventory = new ITAMInventory();
+			ITAMInventoryRun Inventory = new ITAMInventoryRun();
 			Console.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} Inventory completed");
 
 			string json = JsonConvert.SerializeObject(Inventory, Formatting.Indented);
