@@ -17,9 +17,15 @@ namespace ITAMLib.Models
 		[Required]
 		public string ComputerName { get; set; }
 
-		public void Dispose()
-		{
+		[Required]
+		[DataType(DataType.Date)]
+		//[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}", ApplyFormatInEditMode = false)]
+		public DateTime DTCreation { get; set; }
 
-		}
+		[DataType(DataType.Date)]
+		//[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}", ApplyFormatInEditMode = false)]
+		public DateTime? DTCheck { get; set; }
+
+		public void Dispose() { }
 	}
 }

@@ -15,6 +15,7 @@ namespace StoreInventory
 	{
 		public static string JsonPath;
 		public static string DbConnection;
+		public static DateTime DTCheck = DateTime.Now;
 
 		public static ITAMInventory Inventory;
 		private readonly ITAMDbContext _context;
@@ -54,6 +55,8 @@ namespace StoreInventory
 			{
 				using (Win32_Product_SQL product_SQL = new Win32_Product_SQL())
 				{
+					List<Win32_Product_SQL> products = new List<Win32_Product_SQL>();
+
 					foreach (var productItem in Inventory.win32_Product.Items)
 					{
 						// Clear product_SQL, based on Inventory.win32_Product.Items
@@ -75,14 +78,34 @@ namespace StoreInventory
 
 						try
 						{
-							IEnumerable<object> find =
-								new List<object> { product_SQL.ComputerName, product_SQL.IdentifyingNumber, product_SQL.Name, product_SQL.Vendor, product_SQL.Version };
-							var result = db.Product.SqlQuery("SELECT * FROM Win32_Product WHERE [ComputerName] = @p0 AND [IdentifyingNumber] = @p1 AND [Name] = @p2 AND [Vendor] = @p3 AND [Version] = @p4", product_SQL.ComputerName, product_SQL.IdentifyingNumber, product_SQL.Name, product_SQL.Vendor, product_SQL.Version);
-							if (result.Count() == 0)
+							//var result = db.Product
+							//.Where(x => (x.ComputerName == product_SQL.ComputerName) &&
+							//(x.IdentifyingNumber == product_SQL.IdentifyingNumber) &&
+							//(x.Name == product_SQL.Name) &&
+							//(x.Vendor == product_SQL.Vendor) &&
+							//(x.Version == product_SQL.Version))
+							//.SingleOrDefault();
+							//IEnumerable<object> find =
+							//new List<object> { product_SQL.ComputerName, product_SQL.IdentifyingNumber, product_SQL.Name, product_SQL.Vendor, product_SQL.Version };
+							var result = db.Product
+								.SqlQuery("SELECT * FROM Win32_Product WHERE [ComputerName] = @p0 AND " +
+									"[IdentifyingNumber] = @p1 AND ISNULL([Name], '') = ISNULL(@p2, '') AND " +
+									"ISNULL([Vendor], '') = ISNULL(@p3, '') AND " +
+									"ISNULL([Version], '') = ISNULL(@p4, '')",
+									product_SQL.ComputerName, product_SQL.IdentifyingNumber,
+									product_SQL.Name, product_SQL.Vendor, product_SQL.Version)
+								.SingleOrDefault();
+							if (result == null || result.Id == 0)
 							{
+								product_SQL.DTCreation = DTCheck;
 								db.Product.Add(product_SQL);
+								db.SaveChanges();
 							}
-							db.SaveChanges();
+							else
+							{
+								result.DTCheck = DTCheck;
+								db.SaveChanges();
+							}
 						}
 						catch (Exception ex)
 						{
