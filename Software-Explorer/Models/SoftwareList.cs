@@ -16,7 +16,7 @@ namespace Software_Explorer.Models
 
     public SoftwareList()
     {
-      CollectLocalMachineAsync(false);
+      CollectLocalMachineAsync(true);
     }
 
     private async Task CollectLocalMachineAsync(bool WOW6432Node)
