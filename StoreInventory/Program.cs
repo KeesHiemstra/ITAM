@@ -78,26 +78,19 @@ namespace StoreInventory
 
 						try
 						{
-							//var result = db.Product
-							//.Where(x => (x.ComputerName == product_SQL.ComputerName) &&
-							//(x.IdentifyingNumber == product_SQL.IdentifyingNumber) &&
-							//(x.Name == product_SQL.Name) &&
-							//(x.Vendor == product_SQL.Vendor) &&
-							//(x.Version == product_SQL.Version))
-							//.SingleOrDefault();
-							//IEnumerable<object> find =
-							//new List<object> { product_SQL.ComputerName, product_SQL.IdentifyingNumber, product_SQL.Name, product_SQL.Vendor, product_SQL.Version };
 							var result = db.Product
 								.SqlQuery("SELECT * FROM Win32_Product WHERE [ComputerName] = @p0 AND " +
 									"[IdentifyingNumber] = @p1 AND ISNULL([Name], '') = ISNULL(@p2, '') AND " +
 									"ISNULL([Vendor], '') = ISNULL(@p3, '') AND " +
-									"ISNULL([Version], '') = ISNULL(@p4, '')",
+									"ISNULL([Version], '') = ISNULL(@p4, '') AND " +
+				          "[DTDeletion] IS NULL",
 									product_SQL.ComputerName, product_SQL.IdentifyingNumber,
 									product_SQL.Name, product_SQL.Vendor, product_SQL.Version)
 								.SingleOrDefault();
 							if (result == null || result.Id == 0)
 							{
 								product_SQL.DTCreation = DTCheck;
+								product_SQL.DTCheck = DTCheck;
 								db.Product.Add(product_SQL);
 								db.SaveChanges();
 							}
@@ -119,6 +112,27 @@ namespace StoreInventory
 						}//try - catch
 					}//for all items
 				}//using product_SQL
+
+				/*
+				try
+				{
+					var delete = db.Product
+						.SqlQuery("SELECT * FROM Win32_Product WHERE [ComputerName] = @p0 AND " +
+			        "[DTDeletion] IS NULL AND " +
+							"[DTCheck] != @p1",
+							Inventory.ComputerName, DTCheck)
+						.ToList();
+					foreach (var item in delete)
+					{
+						item.DTDeletion = DTCheck;
+						db.SaveChanges();
+					}
+				}
+				catch (Exception ex)
+				{
+					MessageBox.Show($"{ex.Source}\n{ex.Message}", $"Error {Inventory.ComputerName}: 0x{ex.HResult:X}", MessageBoxButton.OK, MessageBoxImage.Error);
+				}
+				*/
 			}//using ITAMDbContext
 		}
 

@@ -19,12 +19,13 @@ namespace ITAMLib.Models
 
 		[Required]
 		[DataType(DataType.Date)]
-		//[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}", ApplyFormatInEditMode = false)]
 		public DateTime DTCreation { get; set; }
 
 		[DataType(DataType.Date)]
-		//[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}", ApplyFormatInEditMode = false)]
 		public DateTime? DTCheck { get; set; }
+
+		[DataType(DataType.Date)]
+		public DateTime? DTDeletion { get; set; }
 
 		public void Dispose() { }
 	}
