@@ -3,6 +3,7 @@
 	[ComputerName] [varchar](15) NOT NULL,
 	[DTCreation] [datetime2] NOT NULL DEFAULT(GETDATE()),
 	[DTCheck] [datetime2] NULL,
+	[DTDeletion] [datetime2] NULL,
 	[Name] [varchar](128) NULL,
 	[IdentifyingNumber] [varchar](38) NOT NULL,
 	[Vendor] [varchar](48) NULL,
