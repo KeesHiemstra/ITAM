@@ -113,15 +113,15 @@ namespace StoreInventory
 
 				try
 				{
-          var delete = db.Product
-						.SqlQuery("SELECT * FROM Win32_Product " +
-              "WHERE [ComputerName] = @p0 AND " +
-			        "[DTDeletion] IS NULL AND " +
-							"[DTCheck] != @p1",
-							Inventory.ComputerName, DTCheck)
-						.ToList();
+          //var delete = db.Product
+            //.SqlQuery("SELECT * FROM Win32_Product " +
+            //        "WHERE [ComputerName] = @p0 AND " +
+            //     "[DTDeletion] IS NULL AND " +
+            //	"[DTCheck] != @p1",
+            //	Inventory.ComputerName, DTCheck)
+            //.ToList();
 
-          Console.WriteLine($"To delete: {delete.Count}\n");
+          //    Console.WriteLine($"To delete: {delete.Count}\n");
           //foreach (var item in delete)
           //{
           //	item.DTDeletion = DTCheck;
