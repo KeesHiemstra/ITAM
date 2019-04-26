@@ -44,5 +44,18 @@ namespace License_Registration
       Application.Current.Shutdown();
     }
     #endregion
+
+    private void SoftwareGroupDateGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+    {
+      MessageBox.Show("MouseDoubleClick");
+    }
+
+    private void SoftwareGroupDateGrid_KeyUp(object sender, KeyEventArgs e)
+    {
+      if (e.Key == Key.Enter)
+      {
+        MessageBox.Show("KeyUp");
+      }
+    }
   }
 }

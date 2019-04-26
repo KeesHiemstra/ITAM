@@ -45,9 +45,24 @@
     </StatusBar>
     
     <DataGrid Name="SoftwareGroupDateGrid"
+              AutoGenerateColumns="False"
+              CanUserAddRows="False"
+              CanUserDeleteRows="False"
               Grid.Column="1"
-              Grid.Row="2">
-      
+              Grid.Row="2"
+              MouseDoubleClick="SoftwareGroupDateGrid_MouseDoubleClick" 
+              KeyUp="SoftwareGroupDateGrid_KeyUp">
+      <DataGrid.Columns>
+        <DataGridTextColumn Header="Name"
+                            Binding="{Binding Name}"
+                            IsReadOnly="True"/>
+        <DataGridTextColumn Header="Vendor"
+                            Binding="{Binding Vendor}"
+                            IsReadOnly="True"/>
+        <DataGridTextColumn Header="Version"
+                            Binding="{Binding Version}"
+                            IsReadOnly="True"/>
+      </DataGrid.Columns>
     </DataGrid>
 
   </Grid>

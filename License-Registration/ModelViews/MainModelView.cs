@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -19,11 +20,18 @@ namespace License_Registration.ModelViews
       Main = main;
       SetDbConnection();
 
+      OpenTable();
+    }
+
+    private async void OpenTable()
+    {
       using (ITAMDbContext db = new ITAMDbContext(DbConnection))
       {
-        ObservableCollection<SoftwareGroup> groups = new ObservableCollection<SoftwareGroup>();
+        ObservableCollection<SoftwareGroup> swGroups = new ObservableCollection<SoftwareGroup>();
+        var SwGroups = await(from g in db.SwGroups
+                           select g).ToListAsync();
 
-        Main.SoftwareGroupDateGrid.ItemsSource = groups;
+        Main.SoftwareGroupDateGrid.ItemsSource = SwGroups;
       }
     }
 
