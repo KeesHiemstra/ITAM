@@ -35,6 +35,14 @@
         <MenuItem Command="cmd:MainWindowCommands.Exit"/>
       </MenuItem>
     </Menu>
+
+    <StatusBar Grid.Column="0"
+               Grid.ColumnSpan="3"
+               Grid.Row="4">
+      <StatusBarItem>
+        <TextBlock Text="OK"/>
+      </StatusBarItem>
+    </StatusBar>
     
     <DataGrid Name="SoftwareGroupDateGrid"
               Grid.Column="1"
