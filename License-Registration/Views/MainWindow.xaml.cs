@@ -27,6 +27,8 @@ namespace License_Registration
     {
       InitializeComponent();
 
+      Title = $"Banking ({System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString()})";
+
       ModelView = new MainModelView(this);
       DataContext = ModelView;
     }
