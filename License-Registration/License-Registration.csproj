@@ -70,6 +70,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Commands\MainWindowCommands.cs" />
     <Compile Include="Models\ITAMDbContext.cs" />
     <Compile Include="Models\SoftwareGroup.cs" />
     <Compile Include="Models\SoftwareItem.cs" />

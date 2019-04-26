@@ -30,5 +30,17 @@ namespace License_Registration
       ModelView = new MainModelView(this);
       DataContext = ModelView;
     }
+
+    #region Exit command
+    private void ExitCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+    {
+      e.CanExecute = true;
+    }
+
+    private void ExitCommand_Execute(object sender, ExecutedRoutedEventArgs e)
+    {
+      Application.Current.Shutdown();
+    }
+    #endregion
   }
 }
