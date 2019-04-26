@@ -134,5 +134,9 @@
       <Name>ITAMLib</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Select Win32_Product.sql" />
+    <Content Include="Win32_Product.sql" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

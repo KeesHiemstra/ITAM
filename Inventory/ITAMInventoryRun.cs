@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ITAMLib
+namespace Inventory
 {
-	public class ITAMInventoryX
+	public class ITAMInventoryRun
 	{
 		public string ComputerName { get; set; } = Environment.MachineName;
 		public string UserName { get; set; } = Environment.UserName;

@@ -1,6 +1,9 @@
 ﻿CREATE TABLE [dbo].[Win32_Product](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[ComputerName] [varchar](15) NOT NULL,
+	[DTCreation] [datetime2] NOT NULL DEFAULT(GETDATE()),
+	[DTCheck] [datetime2] NULL,
+	[DTDeletion] [datetime2] NULL,
 	[Name] [varchar](128) NULL,
 	[IdentifyingNumber] [varchar](38) NOT NULL,
 	[Vendor] [varchar](48) NULL,
@@ -20,3 +23,4 @@
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
+GO

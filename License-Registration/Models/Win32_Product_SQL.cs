@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ITAMLib.Models
+namespace License_Registration.Models
 {
 	[Table("Win32_Product")]
 	public class Win32_Product_SQL : Win32_Product, IDisposable

@@ -1,0 +1,37 @@
+﻿USE ITAM
+GO
+
+CREATE TABLE SoftwareGroup(
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](128) NOT NULL,
+	[Vendor] [varchar](48) NOT NULL,
+	[Version] [varchar](24) NULL,
+
+	CONSTRAINT [PK_SoftwareGroup] PRIMARY KEY CLUSTERED 
+	(
+		[Id] ASC
+	) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+CREATE TABLE SoftwareItem(
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[GroupId] [int] NULL,
+	[Name] [varchar](128) NOT NULL,
+	[Vendor] [varchar](48) NOT NULL,
+	[Version] [varchar](24) NULL,
+	[IdentifyingNumber] [varchar](38) NULL,
+
+	CONSTRAINT [PK_SoftwareItem] PRIMARY KEY CLUSTERED 
+	(
+		[Id] ASC
+	) WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY],
+	
+	CONSTRAINT [FK_SoftwareGroup_SoftwareItem] FOREIGN KEY (GroupId)
+		REFERENCES SoftwareGroup (Id)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE
+
+) ON [PRIMARY]
+GO
+

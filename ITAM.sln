@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.438
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.156
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp-1910501", "WpfApp-1910501\WpfApp-1910501.csproj", "{379CAB47-AF55-4D0B-B28A-DC1B70706EE8}"
 EndProject
@@ -22,6 +22,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ITAM-Software", "ITAM-Software\ITAM-Software.csproj", "{679F0148-5996-41FB-A7DE-86087174B3F2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreInventory", "StoreInventory\StoreInventory.csproj", "{06CC38C4-9F58-4602-B9C2-1655E7B447A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "License-Registration", "License-Registration\License-Registration.csproj", "{AE136038-4C56-4C67-96FA-AF7E6C044B8A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,10 @@ Global
 		{06CC38C4-9F58-4602-B9C2-1655E7B447A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06CC38C4-9F58-4602-B9C2-1655E7B447A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06CC38C4-9F58-4602-B9C2-1655E7B447A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE136038-4C56-4C67-96FA-AF7E6C044B8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE136038-4C56-4C67-96FA-AF7E6C044B8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE136038-4C56-4C67-96FA-AF7E6C044B8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE136038-4C56-4C67-96FA-AF7E6C044B8A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
