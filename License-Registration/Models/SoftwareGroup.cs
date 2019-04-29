@@ -20,6 +20,6 @@ namespace License_Registration.Models
     public string Vendor { get; set; }
     public string Version { get; set; }
 
-    public ObservableCollection<SoftwareItem> SoftwareItems = new ObservableCollection<SoftwareItem>();
+    public virtual ICollection<SoftwareItem> SoftwareItems { get; set; }
   }
 }

@@ -46,5 +46,10 @@ namespace License_Registration.ModelViews
         DbConnection = @"Trusted_Connection=True;Data Source=(Local);Database=ITAM;MultipleActiveResultSets=true";
       }
     }
+
+    internal void OpenSoftwareGroup(SoftwareGroup currentItem)
+    {
+      SoftwareGroupModelView softwareGroupModelView = new SoftwareGroupModelView(currentItem);
+    }
   }
 }

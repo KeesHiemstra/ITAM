@@ -1,4 +1,5 @@
-﻿using License_Registration.ModelViews;
+﻿using License_Registration.Models;
+using License_Registration.ModelViews;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,15 +48,19 @@ namespace License_Registration
 
     private void SoftwareGroupDateGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
-      MessageBox.Show("MouseDoubleClick");
+      ModelView.OpenSoftwareGroup((SoftwareGroup)((DataGrid)sender).CurrentItem);
     }
 
     private void SoftwareGroupDateGrid_KeyUp(object sender, KeyEventArgs e)
     {
       if (e.Key == Key.Enter)
       {
-        MessageBox.Show("KeyUp");
+        ModelView.OpenSoftwareGroup((SoftwareGroup)((DataGrid)sender).CurrentItem);
       }
+    }
+
+    private void SoftwareGroupDateGrid_MouseRightButtonUp(object sender, MouseButtonEventArgs e)
+    {
     }
   }
 }

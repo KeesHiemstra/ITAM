@@ -43,7 +43,7 @@
         <TextBlock Text="OK"/>
       </StatusBarItem>
     </StatusBar>
-    
+
     <DataGrid Name="SoftwareGroupDateGrid"
               AutoGenerateColumns="False"
               CanUserAddRows="False"
@@ -51,7 +51,9 @@
               Grid.Column="1"
               Grid.Row="2"
               MouseDoubleClick="SoftwareGroupDateGrid_MouseDoubleClick" 
-              KeyUp="SoftwareGroupDateGrid_KeyUp">
+              MouseRightButtonUp="SoftwareGroupDateGrid_MouseRightButtonUp"
+              KeyUp="SoftwareGroupDateGrid_KeyUp"
+              >
       <DataGrid.Columns>
         <DataGridTextColumn Header="Name"
                             Binding="{Binding Name}"
