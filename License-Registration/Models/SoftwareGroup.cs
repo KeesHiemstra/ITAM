@@ -20,6 +20,7 @@ namespace License_Registration.Models
     public string Vendor { get; set; }
     public string Version { get; set; }
 
-    public virtual ICollection<SoftwareItem> SoftwareItems { get; set; }
+    //public virtual ICollection<SoftwareItem> SoftwareItems { get; set; }
+    public virtual ObservableCollection<SoftwareItem> SoftwareItems { get; set; }
   }
 }
